@@ -3,6 +3,16 @@
 ## Project premise
 Create an educational experience centered on Sakon Nakhon’s “3 Dhamma”: Dhamma, nature, and culture. Initial source materials provide landmark descriptions, visual assets, and 20 route-based missions for an 8×8 grid.
 
+## Confirmed activity facts
+- This is a physical, unplugged learning station for children.
+- The game board is `data/พื้นที่เกม.png`: an 8×8 grid with columns A–H and rows 1–8.
+- Before each mission, learners place landmark pictures and any applicable obstacle pictures on the board themselves.
+- Learners choose the robot’s starting square and plan the travel route themselves; the board layout and route are not predetermined.
+- A team member acts as the robot and physically follows the instructions.
+- A team member acts as the programmer, writing or arranging the route instructions.
+- Missions use the “3 Dhamma” tourism context. Obstacles may include rock, tree, aggressive dog, and roadworks; missions may require collecting a star.
+- The activity practices computational thinking, sequencing instructions, route planning, collaboration, and local learning about Sakon Nakhon.
+
 ## Scope (initial)
 - Present the three learning domains and their landmarks.
 - Support mission-based navigation on an 8×8 board.
