@@ -1,5 +1,5 @@
 import { motion, MotionConfig, useReducedMotion } from 'motion/react'
-import { lazy, Suspense, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { drawMission } from './data/draw'
 import { missions, places, realms, stepIcon, type Mission, type Realm } from './data/content'
 
@@ -74,16 +74,23 @@ function Mission() {
   </section>
 }
 
-function BoardExample({ className = '', onClick }: { className?: string; onClick?: () => void }) {
+type RobotPoint = { left: string; top: string; instruction: string }
+
+const robotRoute: RobotPoint[] = [
+  { left: '28.9%', top: '77.7%', instruction: 'เริ่มที่ B7' }, { left: '28.9%', top: '69.6%', instruction: 'เดินขึ้น 1 ช่อง' }, { left: '28.9%', top: '61.5%', instruction: 'เดินขึ้น 1 ช่อง' }, { left: '28.9%', top: '53.4%', instruction: 'เดินขึ้น 1 ช่อง' }, { left: '28.9%', top: '45.3%', instruction: 'เดินขึ้น 1 ช่อง' }, { left: '38.6%', top: '45.3%', instruction: 'เดินขวา: ถึงหนองหาร' }, { left: '48.3%', top: '45.3%', instruction: 'เดินขวา: หลบต้นไม้ด้านล่าง' }, { left: '58%', top: '45.3%', instruction: 'เดินขวา 1 ช่อง' }, { left: '67.7%', top: '45.3%', instruction: 'เดินขวา 1 ช่อง' }, { left: '67.7%', top: '37.2%', instruction: 'เดินขึ้น: ถึงผานางเมิน' }, { left: '77.4%', top: '37.2%', instruction: 'เดินขวา 1 ช่อง' }, { left: '87.1%', top: '37.2%', instruction: 'เดินขวา 1 ช่อง' }, { left: '87.1%', top: '45.3%', instruction: 'เดินลง 1 ช่อง' }, { left: '87.1%', top: '53.4%', instruction: 'เดินลง 1 ช่อง' }, { left: '87.1%', top: '61.5%', instruction: 'เดินลง: เก็บดาว!' }, { left: '77.4%', top: '61.5%', instruction: 'เดินซ้าย 1 ช่อง' }, { left: '77.4%', top: '69.6%', instruction: 'เดินลง 1 ช่อง' }, { left: '77.4%', top: '77.7%', instruction: 'เดินลง: ถึงจุดจบ!' },
+]
+
+function BoardExample({ className = '', onClick, robot, starCollected = false }: { className?: string; onClick?: () => void; robot?: RobotPoint; starCollected?: boolean }) {
   const content = <><img src="/พื้นที่เกม.png" alt="ตัวอย่างกระดาน 8 คูณ 8 ที่วางจุดเริ่มต้น หนองหาร ต้นไม้ ดาว ผานางเมิน และจุดจบ" />
     <div className="board-marker start" style={{ left: '28.9%', top: '77.7%' }}><img src="/รูปสถานที่สำคัญ/จุดเริ่มต้น.png" alt="" /><small>B7 เริ่ม</small></div>
     <div className="board-marker place" style={{ left: '38.6%', top: '45.3%' }}><img src="/รูปสถานที่สำคัญ/หนองหาร.png" alt="" /><small>C3 หนองหาร</small></div>
     <div className="board-marker obstacle" style={{ left: '48.3%', top: '53.4%' }}><img src="/รูปสถานที่สำคัญ/ต้นไม้.png" alt="" /><small>D4 ต้นไม้</small></div>
     <div className="board-marker place" style={{ left: '67.7%', top: '37.2%' }}><img src="/รูปสถานที่สำคัญ/ผานางเมิน ภูพาน.png" alt="" /><small>F2 ผานางเมิน</small></div>
-    <div className="board-marker star" style={{ left: '87.1%', top: '61.5%' }}><span>⭐</span><small>H5 เก็บดาว</small></div>
+    <div className={`board-marker star ${starCollected ? 'collected' : ''}`} style={{ left: '87.1%', top: '61.5%' }}><span>{starCollected ? '✅' : '⭐'}</span><small>{starCollected ? 'H5 เก็บแล้ว' : 'H5 เก็บดาว'}</small></div>
     <div className="board-marker finish" style={{ left: '77.4%', top: '77.7%' }}><span>🏆</span><small>G7 จบ</small></div></>
-  if (onClick) return <button type="button" className={`board-demo-image ${className}`} aria-label="ขยายตัวอย่างกระดานเต็มหน้าจอ" onClick={onClick}>{content}</button>
-  return <div className={`board-demo-image ${className}`}>{content}</div>
+  const withRobot = <>{content}{robot && <div className="board-robot" style={{ left: robot.left, top: robot.top }}><span>🤖</span><small>หุ่นยนต์</small></div>}</>
+  if (onClick) return <button type="button" className={`board-demo-image ${className}`} aria-label="ขยายตัวอย่างกระดานเต็มหน้าจอ" onClick={onClick}>{withRobot}</button>
+  return <div className={`board-demo-image ${className}`}>{withRobot}</div>
 }
 
 function BoardDemoModal({ onClose }: { onClose: () => void }) {
@@ -100,16 +107,43 @@ function BoardDemoModal({ onClose }: { onClose: () => void }) {
   </div>
 }
 
+function RobotDemoModal({ onClose }: { onClose: () => void }) {
+  const [step, setStep] = useState(0)
+  const [isPlaying, setPlaying] = useState(true)
+  const current = robotRoute[step]
+  const starCollected = step >= 14
+
+  useEffect(() => {
+    if (!isPlaying || step >= robotRoute.length - 1) return undefined
+    const timer = window.setTimeout(() => setStep((value) => value + 1), 720)
+    return () => window.clearTimeout(timer)
+  }, [isPlaying, step])
+
+  const replay = () => { setStep(0); setPlaying(true) }
+
+  return <div className="mission-backdrop" role="presentation" onMouseDown={onClose}>
+    <motion.div className="robot-demo-modal" role="dialog" aria-modal="true" aria-labelledby="robot-demo-title" initial={{ opacity: 0, scale: .94, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} onMouseDown={(event) => event.stopPropagation()}>
+      <button type="button" className="modal-close" aria-label="ปิดตัวอย่างหุ่นยนต์เดิน" onClick={onClose}>×</button>
+      <h2 id="robot-demo-title">ตัวอย่างสั่งหุ่นยนต์เดิน</h2>
+      <div className="robot-command" aria-live="polite"><span>คำสั่งตอนนี้</span><strong>{current.instruction}</strong><small>ขั้นที่ {step + 1} / {robotRoute.length}</small></div>
+      <BoardExample className="robot-board-image" robot={current} starCollected={starCollected} />
+      <div className="robot-controls"><button type="button" className="secondary-button" onClick={() => setPlaying((value) => !value)}>{isPlaying ? 'หยุดชั่วคราว' : 'เล่นต่อ'}</button><button type="button" className="primary-button" onClick={replay}>↻ เล่นตัวอย่างใหม่</button></div>
+    </motion.div>
+  </div>
+}
+
 export default function App() {
   const [view, setView] = useState<View>('home')
   const [isBoardDemoOpen, setBoardDemoOpen] = useState(false)
+  const [isRobotDemoOpen, setRobotDemoOpen] = useState(false)
   return <MotionConfig reducedMotion="user"><main>
     <header className="hero"><Suspense fallback={null}><AdventureScene /></Suspense><div className="hero-content"><p className="eyebrow">ABS BOOTCAMP · UNPLUGGED</p><h1>ตะลุย <em>แดน 3 ธรรม</em></h1><p className="hero-copy">เรียนรู้สกลนคร แล้วออกแบบคำสั่งให้หุ่นยนต์ของทีม<span className="keep-line">เดินบนกระดานจริง</span></p><div className="hero-actions"><button type="button" className="primary-button" onClick={() => setView('knowledge')}>เริ่มเรียนรู้</button><button type="button" className="ghost-button" onClick={() => setView('mission')}>สุ่มภารกิจ</button></div></div></header>
     <nav aria-label="เมนูหลัก"><button type="button" aria-current={view === 'home' ? 'page' : undefined} onClick={() => setView('home')}>หน้าแรก</button><button type="button" aria-current={view === 'knowledge' ? 'page' : undefined} onClick={() => setView('knowledge')}>1. เรียนรู้</button><button type="button" aria-current={view === 'mission' ? 'page' : undefined} onClick={() => setView('mission')}>2. สุ่มภารกิจ</button></nav>
-    {view === 'home' && <section className="home-intro"><h2><span className="home-heading-line">ดูข้อมูลก่อน แล้วไปทำภารกิจบนกระดานจริง</span></h2><div className="home-steps"><button type="button" className="flow-step" onClick={() => setView('knowledge')}><b>1</b><span>เรียนรู้สถานที่</span><small>กดเพื่อเริ่มเรียนรู้</small></button><button type="button" className="flow-step" onClick={() => setView('mission')}><b>2</b><span>สุ่มภารกิจทีม</span><small>กดเพื่อสุ่มภารกิจ</small></button><button type="button" className="flow-step" onClick={() => setBoardDemoOpen(true)}><b>3</b><span>วางรูปบนตาราง</span><small>ดูตัวอย่างการวาง</small></button><button type="button" className="flow-step" onClick={() => setView('mission')}><b>4</b><span>สั่งหุ่นยนต์เดิน</span><small>ดูโจทย์ภารกิจ</small></button></div></section>}
+    {view === 'home' && <section className="home-intro"><h2><span className="home-heading-line">ดูข้อมูลก่อน แล้วไปทำภารกิจบนกระดานจริง</span></h2><div className="home-steps"><button type="button" className="flow-step" onClick={() => setView('knowledge')}><b>1</b><span>เรียนรู้สถานที่</span><small>กดเพื่อเริ่มเรียนรู้</small></button><button type="button" className="flow-step" onClick={() => setView('mission')}><b>2</b><span>สุ่มภารกิจทีม</span><small>กดเพื่อสุ่มภารกิจ</small></button><button type="button" className="flow-step" onClick={() => setBoardDemoOpen(true)}><b>3</b><span>วางรูปบนตาราง</span><small>ดูตัวอย่างการวาง</small></button><button type="button" className="flow-step" onClick={() => setRobotDemoOpen(true)}><b>4</b><span>สั่งหุ่นยนต์เดิน</span><small>ดูตัวอย่างการเดิน</small></button></div></section>}
     {view === 'knowledge' && <Knowledge onMission={() => setView('mission')} />}
     {view === 'mission' && <Mission />}
     <footer>กิจกรรม Unplugged — การวางรูปและการเดินของหุ่นยนต์ทำบนกระดานจริงค่ะ</footer>
     {isBoardDemoOpen && <BoardDemoModal onClose={() => setBoardDemoOpen(false)} />}
+    {isRobotDemoOpen && <RobotDemoModal onClose={() => setRobotDemoOpen(false)} />}
   </main></MotionConfig>
 }
