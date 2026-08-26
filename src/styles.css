@@ -15,6 +15,7 @@ main { overflow: hidden; min-height: 100vh; }
 .hero h1 { font-size: clamp(3rem, 8vw, 6.5rem); line-height: .9; margin: 12px 0 20px; font-family: Mali, Tahoma, sans-serif; text-shadow: 0 5px 0 #0b2637; }
 .hero h1 em { display: inline-block; font-style: normal; color: #ffd449; transform: rotate(-3deg); }
 .hero-copy { font-size: clamp(1.05rem, 2vw, 1.35rem); line-height: 1.7; max-width: 620px; margin: auto; }
+.keep-line { white-space: nowrap; }
 .hero-actions { display: flex; justify-content: center; gap: 14px; margin-top: 28px; flex-wrap: wrap; }
 .primary-button, .secondary-button, .ghost-button, .reset-button { border: 0; border-radius: 999px; min-height: 50px; padding: 12px 22px; font-weight: 800; transition: transform .2s, box-shadow .2s; }
 .primary-button { color: #16354a; background: #ffd449; box-shadow: 0 5px 0 #e69d1e; } .primary-button:hover { transform: translateY(-3px); box-shadow: 0 8px 0 #e69d1e; }
