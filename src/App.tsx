@@ -121,7 +121,7 @@ function RobotDemoModal({ onClose }: { onClose: () => void }) {
 
   const replay = () => { setStep(0); setPlaying(true) }
 
-  return <div className="mission-backdrop" role="presentation" onMouseDown={onClose}>
+  return <div className="mission-backdrop robot-backdrop" role="presentation" onMouseDown={onClose}>
     <motion.div className="robot-demo-modal" role="dialog" aria-modal="true" aria-labelledby="robot-demo-title" initial={{ opacity: 0, scale: .94, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} onMouseDown={(event) => event.stopPropagation()}>
       <button type="button" className="modal-close" aria-label="ปิดตัวอย่างหุ่นยนต์เดิน" onClick={onClose}>×</button>
       <h2 id="robot-demo-title">ตัวอย่างสั่งหุ่นยนต์เดิน</h2>
