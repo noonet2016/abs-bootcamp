@@ -96,7 +96,7 @@ function BoardDemoModal({ onClose }: { onClose: () => void }) {
       <BoardExample onClick={() => setFullscreen(true)} />
       <p className="board-demo-note">นี่เป็นตัวอย่างเท่านั้น — ทีมสามารถวางรูปและออกแบบเส้นทางใหม่ได้เอง</p>
     </motion.div>
-    {isFullscreen && <div className="board-fullscreen" role="dialog" aria-modal="true" aria-label="ตัวอย่างกระดานแบบเต็มหน้าจอ" onMouseDown={() => setFullscreen(false)}><button type="button" className="modal-close board-fullscreen-close" aria-label="ปิดภาพเต็มหน้าจอ" onClick={() => setFullscreen(false)}>×</button><div onMouseDown={(event) => event.stopPropagation()}><BoardExample className="board-fullscreen-image" /></div></div>}
+    {isFullscreen && <div className="board-fullscreen" role="dialog" aria-modal="true" aria-label="ตัวอย่างกระดานแบบเต็มหน้าจอ" onMouseDown={(event) => { event.stopPropagation(); setFullscreen(false) }}><button type="button" className="modal-close board-fullscreen-close" aria-label="ปิดภาพเต็มหน้าจอ" onClick={() => setFullscreen(false)}>×</button><div onMouseDown={(event) => event.stopPropagation()}><BoardExample className="board-fullscreen-image" /></div></div>}
   </div>
 }
 
