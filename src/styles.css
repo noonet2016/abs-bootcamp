@@ -8,11 +8,11 @@
 body { margin: 0; min-width: 320px; background: radial-gradient(circle at 20% 15%, #fffbe5 0 8%, transparent 25%), #dff3ee; }
 button { font: inherit; cursor: pointer; } button:focus-visible { outline: 4px solid #ff8d31; outline-offset: 3px; }
 main { overflow: hidden; min-height: 100vh; }
-.hero { min-height: 460px; color: white; position: relative; display: grid; place-items: center; padding: 60px 24px 78px; isolation: isolate; }
+.hero { min-height: 420px; color: white; position: relative; display: grid; place-items: center; padding: 52px 24px 70px; isolation: isolate; }
 .scene { position: absolute; inset: 0; z-index: -2; } .hero::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(100deg, rgba(12,41,63,.94), rgba(14,54,73,.72)); }
 .hero-content { width: min(100%, 820px); text-align: center; }
 .eyebrow, .section-heading > span { font-family: Mali, system-ui, sans-serif; font-weight: 700; letter-spacing: .12em; font-size: .8rem; }
-.hero h1 { font-size: clamp(3rem, 8vw, 6.5rem); line-height: .9; margin: 12px 0 20px; font-family: Mali, Tahoma, sans-serif; text-shadow: 0 5px 0 #0b2637; }
+.hero h1 { font-size: clamp(2.8rem, 6vw, 5.2rem); line-height: .95; margin: 12px 0 16px; font-family: Mali, Tahoma, sans-serif; text-shadow: 0 5px 0 #0b2637; }
 .hero h1 em { display: inline-block; font-style: normal; color: #ffd449; transform: rotate(-3deg); }
 .hero-copy { font-size: clamp(1.05rem, 2vw, 1.35rem); line-height: 1.7; max-width: 620px; margin: auto; }
 .keep-line { white-space: nowrap; }
