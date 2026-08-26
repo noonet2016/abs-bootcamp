@@ -126,7 +126,7 @@ function RobotDemoModal({ onClose }: { onClose: () => void }) {
       <button type="button" className="modal-close" aria-label="ปิดตัวอย่างหุ่นยนต์เดิน" onClick={onClose}>×</button>
       <h2 id="robot-demo-title">ตัวอย่างสั่งหุ่นยนต์เดิน</h2>
       <div className="robot-command" aria-live="polite"><span>คำสั่งตอนนี้</span><strong>{current.instruction}</strong><small>ขั้นที่ {step + 1} / {robotRoute.length}</small></div>
-      <BoardExample className="robot-board-image" robot={current} starCollected={starCollected} />
+      <div className="robot-demo-layout"><BoardExample className="robot-board-image" robot={current} starCollected={starCollected} /><aside className="robot-flow-panel" aria-label="ลำดับคำสั่งของหุ่นยนต์"><h3>ลำดับการเดิน</h3><ol>{robotRoute.map((point, index) => <li key={`${point.left}-${point.top}`} className={index < step ? 'completed' : index === step ? 'current' : ''} aria-current={index === step ? 'step' : undefined}><span>{index < step ? '✓' : index + 1}</span><p>{point.instruction}</p></li>)}</ol></aside></div>
       <div className="robot-controls"><button type="button" className="secondary-button" onClick={() => setPlaying((value) => !value)}>{isPlaying ? 'หยุดชั่วคราว' : 'เล่นต่อ'}</button><button type="button" className="primary-button" onClick={replay}>↻ เล่นตัวอย่างใหม่</button></div>
     </motion.div>
   </div>
