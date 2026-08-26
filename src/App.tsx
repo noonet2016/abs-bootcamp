@@ -81,6 +81,6 @@ export default function App() {
     {view === 'home' && <section className="home-intro"><h2><span className="home-heading-line">ดูข้อมูลก่อน แล้วไปทำภารกิจบนกระดานจริง</span></h2><div className="home-steps"><div className="flow-step"><b>1</b><span>เรียนรู้สถานที่</span></div><div className="flow-step"><b>2</b><span>สุ่มภารกิจทีม</span></div><div className="flow-step"><b>3</b><span>วางรูปบนตาราง</span></div><div className="flow-step"><b>4</b><span>สั่งหุ่นยนต์เดิน</span></div></div></section>}
     {view === 'knowledge' && <Knowledge onMission={() => setView('mission')} />}
     {view === 'mission' && <Mission />}
-    <footer>เว็บไซต์นี้ช่วยเตรียมภารกิจ Unplugged — การวางรูปและการเดินของหุ่นยนต์ทำบนกระดานจริงค่ะ</footer>
+    <footer>กิจกรรม Unplugged — การวางรูปและการเดินของหุ่นยนต์ทำบนกระดานจริงค่ะ</footer>
   </main></MotionConfig>
 }
