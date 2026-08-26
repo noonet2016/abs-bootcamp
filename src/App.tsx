@@ -21,7 +21,7 @@ function Knowledge({ onMission }: { onMission: () => void }) {
 
   return (
     <section className="panel knowledge" aria-labelledby="knowledge-title">
-      <div className="section-heading"><span>PART 1</span><h2 id="knowledge-title">เปิดแผนที่ 3 ดินแดน</h2><p>กดเลือกดินแดน แล้วทำความรู้จักสถานที่สำคัญกันค่ะ</p></div>
+      <div className="section-heading"><h2 id="knowledge-title">เปิดแผนที่ 3 ดินแดน</h2><p>กดเลือกดินแดน แล้วทำความรู้จักสถานที่สำคัญกันค่ะ</p></div>
       <div className="realm-tabs" role="tablist" aria-label="เลือกดินแดน">
         {realmOrder.map((key) => <button key={key} type="button" role="tab" aria-selected={realm === key} className={`realm-tab ${realms[key].color}`} onClick={() => chooseRealm(key)}>{realms[key].icon} {realms[key].title}</button>)}
       </div>
@@ -67,7 +67,7 @@ function Mission() {
   }
 
   return <section className="panel mission" aria-labelledby="mission-title">
-    <div className="section-heading"><span>PART 2</span><h2 id="mission-title">สุ่มภารกิจของทีม</h2><p>ไม่ต้องเลือกหมวดค่ะ กดปุ่ม แล้วออกเดินทางไปด้วยกัน!</p></div>
+    <div className="section-heading"><h2 id="mission-title">สุ่มภารกิจของทีม</h2><p>ไม่ต้องเลือกหมวดค่ะ กดปุ่ม แล้วออกเดินทางไปด้วยกัน!</p></div>
     {!selected ? <div className="draw-stage"><div className={`compass ${isDrawing ? 'spinning' : ''}`} aria-hidden="true">🧭</div><p>ในรอบนี้เหลือ <strong>{remaining.length || missions.length}</strong> ภารกิจ</p><button type="button" className="primary-button draw-button" onClick={draw} disabled={isDrawing}>{isDrawing ? 'กำลังสุ่ม...' : '✨ สุ่มภารกิจ!'}</button></div> : <motion.div initial={shouldReduceMotion ? false : { opacity: 0, y: 22, rotate: -2 }} animate={{ opacity: 1, y: 0, rotate: 0 }}><MissionBrief mission={selected} onDrawAgain={draw} /></motion.div>}
     {remaining.length === 0 && selected && <button type="button" className="reset-button" onClick={() => { setRemaining(missions.map((mission) => mission.id)); setSelected(null) }}>เริ่มชุดภารกิจใหม่ 20 ใบ</button>}
   </section>
