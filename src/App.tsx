@@ -76,10 +76,10 @@ function Mission() {
 
 function BoardExample({ className = '', onClick }: { className?: string; onClick?: () => void }) {
   const content = <><img src="/พื้นที่เกม.png" alt="ตัวอย่างกระดาน 8 คูณ 8 ที่วางจุดเริ่มต้น หนองหาร ต้นไม้ ดาว ผานางเมิน และจุดจบ" />
-    <div className="board-marker start" style={{ left: '28.9%', top: '77.7%' }}><span>🚩</span><small>B7 เริ่ม</small></div>
-    <div className="board-marker place" style={{ left: '38.6%', top: '45.3%' }}><span>🌊</span><small>C3 หนองหาร</small></div>
-    <div className="board-marker obstacle" style={{ left: '48.3%', top: '53.4%' }}><span>🌳</span><small>D4 ต้นไม้</small></div>
-    <div className="board-marker place" style={{ left: '67.7%', top: '37.2%' }}><span>⛰️</span><small>F2 ผานางเมิน</small></div>
+    <div className="board-marker start" style={{ left: '28.9%', top: '77.7%' }}><img src="/รูปสถานที่สำคัญ/จุดเริ่มต้น.png" alt="" /><small>B7 เริ่ม</small></div>
+    <div className="board-marker place" style={{ left: '38.6%', top: '45.3%' }}><img src="/รูปสถานที่สำคัญ/หนองหาร.png" alt="" /><small>C3 หนองหาร</small></div>
+    <div className="board-marker obstacle" style={{ left: '48.3%', top: '53.4%' }}><img src="/รูปสถานที่สำคัญ/ต้นไม้.png" alt="" /><small>D4 ต้นไม้</small></div>
+    <div className="board-marker place" style={{ left: '67.7%', top: '37.2%' }}><img src="/รูปสถานที่สำคัญ/ผานางเมิน ภูพาน.png" alt="" /><small>F2 ผานางเมิน</small></div>
     <div className="board-marker star" style={{ left: '87.1%', top: '61.5%' }}><span>⭐</span><small>H5 เก็บดาว</small></div>
     <div className="board-marker finish" style={{ left: '77.4%', top: '77.7%' }}><span>🏆</span><small>G7 จบ</small></div></>
   if (onClick) return <button type="button" className={`board-demo-image ${className}`} aria-label="ขยายตัวอย่างกระดานเต็มหน้าจอ" onClick={onClick}>{content}</button>
