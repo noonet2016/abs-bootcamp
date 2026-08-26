@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Mali:wght@400;500;600;700&display=swap');
+@font-face { font-family: 'Mali'; font-style: normal; font-weight: 400; font-display: swap; src: url('./assets/fonts/Mali-400.ttf') format('truetype'); }
+@font-face { font-family: 'Mali'; font-style: normal; font-weight: 500; font-display: swap; src: url('./assets/fonts/Mali-500.ttf') format('truetype'); }
+@font-face { font-family: 'Mali'; font-style: normal; font-weight: 600; font-display: swap; src: url('./assets/fonts/Mali-600.ttf') format('truetype'); }
+@font-face { font-family: 'Mali'; font-style: normal; font-weight: 700; font-display: swap; src: url('./assets/fonts/Mali-700.ttf') format('truetype'); }
 
 :root { font-family: Mali, "Noto Sans Thai", Tahoma, system-ui, sans-serif; color: #19324a; background: #dff3ee; font-synthesis: none; }
 * { box-sizing: border-box; }
