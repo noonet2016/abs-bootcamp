@@ -1,5 +1,25 @@
 # Worklog — ABS Bootcamp
 
+## 2026-08-28 — Checkpoint before pause
+
+### Completed since the previous checkpoint
+- Added the animated robot demonstration in full-screen mode.
+- Added an animated side flow that auto-scrolls to the active movement step.
+- Added the board-placement example popup and full-screen board view.
+- Updated board examples to use supplied landmark and obstacle images.
+- Rebalanced hero, flow cards, popup sizing, headings, footer spacing, and Thai Mali font usage.
+- Stopped the local dev server on request.
+
+### Verification at checkpoint
+- `npm test` — 4 tests passed.
+- `npm run build` — passed; Vite emits a warning about the large Three.js chunk, but the build succeeds.
+- Git working tree is clean.
+
+### Resume point
+- Restart with `npm run dev` from this directory.
+- Review the latest robot full-screen flow and board example interaction on a real tablet-sized viewport.
+- Consider optimizing the Three.js chunk and adding a formal component/browser test for the modal and robot-flow interactions.
+
 ## 2026-08-26 — Project initialization
 
 ### Completed
