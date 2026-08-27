@@ -1,7 +1,8 @@
 # ABS Bootcamp Checkpoint
 
 **Date:** 2026-08-28
-**Latest commit:** `9655f33 fix: auto scroll active robot flow step`
+**Implementation baseline:** `9655f33 fix: auto scroll active robot flow step`
+**Checkpoint commit:** `1ddd6e7 docs: record project checkpoint`
 
 ## Current artifact
 The project contains a static React + TypeScript + Vite website for the unplugged “แดน 3 ธรรม” activity:
