@@ -11,3 +11,6 @@ node_modules/
 dist/
 build/
 .next/
+
+# macOS metadata inside build output
+dist/.DS_Store

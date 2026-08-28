@@ -1,3 +1,4 @@
+import { asset } from '../base'
 export type Realm = 'dhamma' | 'nature' | 'culture'
 export type MissionRealm = Realm | 'mixed'
 export type StepKind = 'start' | 'place' | 'star' | 'avoid' | 'finish'
@@ -18,7 +19,7 @@ export type Mission = {
   steps: MissionStep[]
 }
 
-const image = (file: string) => `/รูปสถานที่สำคัญ/${file}`
+const image = (file: string) => asset(`/รูปสถานที่สำคัญ/${file}`)
 
 export const realms: Record<Realm, { title: string; short: string; icon: string; color: string }> = {
   dhamma: { title: 'แดนธรรมะ', short: 'เที่ยววัด เรียนรู้ใจสงบ', icon: '🛕', color: 'gold' },

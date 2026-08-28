@@ -1,3 +1,4 @@
+import { asset } from './base'
 import { motion, MotionConfig, useReducedMotion } from 'motion/react'
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { drawMission } from './data/draw'
@@ -43,33 +44,33 @@ function Knowledge({ onMission }: { onMission: () => void }) {
 function MissionBrief({ mission, onDrawAgain, isDrawing }: { mission: Mission; onDrawAgain: () => void; isDrawing: boolean }) {
   const theme = mission.realm === 'mixed' ? 'mixed' : realms[mission.realm].color
   const missionImages: Record<string, string> = {
-    'เริ่มต้น': '/รูปสถานที่สำคัญ/จุดเริ่มต้น.png',
-    'พระธาตุเชิงชุม': '/รูปสถานที่สำคัญ/วัดพระธาตุเชิงชุม.png',
-    'วัดป่าสุทธาวาส': '/รูปสถานที่สำคัญ/วัดป่าสุทธาวาส.png',
-    'วัดถ้ำผาแด่น': '/รูปสถานที่สำคัญ/วัดถ้ำผาแด่น.png',
-    'วัดถ้ำขาม': '/รูปสถานที่สำคัญ/วัดถ้ำขาม.png',
-    'วัดป่านาคนิมิตต์': '/รูปสถานที่สำคัญ/วัดป่านาคนิมิตต์.png',
-    'หนองหาร': '/รูปสถานที่สำคัญ/หนองหาร.png',
-    'โค้งปิ้งงู': '/รูปสถานที่สำคัญ/โค้งปิ้งงู.png',
-    'ผานางเมิน': '/รูปสถานที่สำคัญ/ผานางเมิน ภูพาน.png',
-    'น้ำตกคำน้ำสร้าง': '/รูปสถานที่สำคัญ/น้ำตกคำสร้าง ห้วยหวด ภูผายล.png',
-    'อ่างเก็บน้ำห้วยหวด': '/รูปสถานที่สำคัญ/น้ำตกคำสร้าง ห้วยหวด ภูผายล.png',
-    'อุทยานแห่งชาติภูผายล': '/รูปสถานที่สำคัญ/อุทยานแห่งชาติภูผายล.png',
-    'อุทยานบัวเฉลิมพระเกียรติ': '/รูปสถานที่สำคัญ/อุทยานบัว.png',
-    'ปราสาทผึ้ง': '/รูปสถานที่สำคัญ/แห่ปราสาทผึ้ง.png',
-    'ประเพณีแห่ปราสาทผึ้ง': '/รูปสถานที่สำคัญ/แห่ปราสาทผึ้ง.png',
-    'ผ้าย้อมคราม': '/รูปสถานที่สำคัญ/ผ้าย้อมคราม.png',
-    'ผ้าย้อมครามบ้านดอนกอย': '/รูปสถานที่สำคัญ/ผ้าย้อมคราม.png',
-    'ชุมชนท่าแร่': '/รูปสถานที่สำคัญ/ท่าแร่.png',
-    'ประเพณีแห่ดาว': '/รูปสถานที่สำคัญ/แห่ดาว.png',
-    '8 ชนเผ่า': '/รูปสถานที่สำคัญ/ชนเผ่า.png',
-    '8 ชนเผ่าสกลนคร': '/รูปสถานที่สำคัญ/ชนเผ่า.png',
-    'ภูไท': '/รูปสถานที่สำคัญ/ชนเผ่า.png',
+    'เริ่มต้น': asset('/รูปสถานที่สำคัญ/จุดเริ่มต้น.png'),
+    'พระธาตุเชิงชุม': asset('/รูปสถานที่สำคัญ/วัดพระธาตุเชิงชุม.png'),
+    'วัดป่าสุทธาวาส': asset('/รูปสถานที่สำคัญ/วัดป่าสุทธาวาส.png'),
+    'วัดถ้ำผาแด่น': asset('/รูปสถานที่สำคัญ/วัดถ้ำผาแด่น.png'),
+    'วัดถ้ำขาม': asset('/รูปสถานที่สำคัญ/วัดถ้ำขาม.png'),
+    'วัดป่านาคนิมิตต์': asset('/รูปสถานที่สำคัญ/วัดป่านาคนิมิตต์.png'),
+    'หนองหาร': asset('/รูปสถานที่สำคัญ/หนองหาร.png'),
+    'โค้งปิ้งงู': asset('/รูปสถานที่สำคัญ/โค้งปิ้งงู.png'),
+    'ผานางเมิน': asset('/รูปสถานที่สำคัญ/ผานางเมิน ภูพาน.png'),
+    'น้ำตกคำน้ำสร้าง': asset('/รูปสถานที่สำคัญ/น้ำตกคำสร้าง ห้วยหวด ภูผายล.png'),
+    'อ่างเก็บน้ำห้วยหวด': asset('/รูปสถานที่สำคัญ/น้ำตกคำสร้าง ห้วยหวด ภูผายล.png'),
+    'อุทยานแห่งชาติภูผายล': asset('/รูปสถานที่สำคัญ/อุทยานแห่งชาติภูผายล.png'),
+    'อุทยานบัวเฉลิมพระเกียรติ': asset('/รูปสถานที่สำคัญ/อุทยานบัว.png'),
+    'ปราสาทผึ้ง': asset('/รูปสถานที่สำคัญ/แห่ปราสาทผึ้ง.png'),
+    'ประเพณีแห่ปราสาทผึ้ง': asset('/รูปสถานที่สำคัญ/แห่ปราสาทผึ้ง.png'),
+    'ผ้าย้อมคราม': asset('/รูปสถานที่สำคัญ/ผ้าย้อมคราม.png'),
+    'ผ้าย้อมครามบ้านดอนกอย': asset('/รูปสถานที่สำคัญ/ผ้าย้อมคราม.png'),
+    'ชุมชนท่าแร่': asset('/รูปสถานที่สำคัญ/ท่าแร่.png'),
+    'ประเพณีแห่ดาว': asset('/รูปสถานที่สำคัญ/แห่ดาว.png'),
+    '8 ชนเผ่า': asset('/รูปสถานที่สำคัญ/ชนเผ่า.png'),
+    '8 ชนเผ่าสกลนคร': asset('/รูปสถานที่สำคัญ/ชนเผ่า.png'),
+    'ภูไท': asset('/รูปสถานที่สำคัญ/ชนเผ่า.png'),
     'เก็บดาว': commandCardCollectStar,
-    'หลบก้อนหิน': '/รูปสถานที่สำคัญ/ก้อนหิน.png',
-    'หลบต้นไม้': '/รูปสถานที่สำคัญ/ต้นไม้.png',
-    'หลบถนนซ่อม': '/รูปสถานที่สำคัญ/ซ่อมถนน.png',
-    'หลบสุนัขดุ': '/รูปสถานที่สำคัญ/หมาดุ.png',
+    'หลบก้อนหิน': asset('/รูปสถานที่สำคัญ/ก้อนหิน.png'),
+    'หลบต้นไม้': asset('/รูปสถานที่สำคัญ/ต้นไม้.png'),
+    'หลบถนนซ่อม': asset('/รูปสถานที่สำคัญ/ซ่อมถนน.png'),
+    'หลบสุนัขดุ': asset('/รูปสถานที่สำคัญ/หมาดุ.png'),
   }
   const imageSteps = mission.steps.filter((step) => missionImages[step.label])
   const routeBreakAfter = mission.steps.length === 7 ? 5 : 6
@@ -151,11 +152,11 @@ function BoardExample({ className = '', onClick, robot, starCollected = false }:
   const markerPositions = isRobotDemo
     ? { nongHan: { left: '38.6%', top: '37.2%' }, tree: { left: '58%', top: '53.4%' }, pha: { left: '67.7%', top: '37.2%' }, start: { left: '28.9%', top: '77.7%' }, star: { left: '87.1%', top: '61.5%' }, finish: { left: '77.4%', top: '77.7%' } }
     : { nongHan: { left: '38.6%', top: '37.2%' }, tree: { left: '58%', top: '53.4%' }, pha: { left: '67.7%', top: '37.2%' }, start: { left: '28.9%', top: '77.7%' }, star: { left: '87.1%', top: '61.5%' }, finish: { left: '77.4%', top: '77.7%' } }
-  const content = <><img src="/พื้นที่เกม.png" alt="ตัวอย่างกระดาน 8 คูณ 8 ที่วางจุดเริ่มต้น หนองหาร ต้นไม้ ดาว ผานางเมิน และจุดจบ" />
-    <div className="board-marker start" style={markerPositions.start}><img src="/รูปสถานที่สำคัญ/จุดเริ่มต้น.png" alt="" /><small>B7 เริ่ม</small></div>
-    <div className="board-marker place" style={markerPositions.nongHan}><img src="/รูปสถานที่สำคัญ/หนองหาร.png" alt="" /><small>C2 หนองหาร</small></div>
-    <div className="board-marker obstacle" style={markerPositions.tree}><img src="/รูปสถานที่สำคัญ/ต้นไม้.png" alt="" /><small>E4 ต้นไม้</small></div>
-    <div className="board-marker place" style={markerPositions.pha}><img src="/รูปสถานที่สำคัญ/ผานางเมิน ภูพาน.png" alt="" /><small>F2 ผานางเมิน</small></div>
+  const content = <><img src={asset('/พื้นที่เกม.png')} alt="ตัวอย่างกระดาน 8 คูณ 8 ที่วางจุดเริ่มต้น หนองหาร ต้นไม้ ดาว ผานางเมิน และจุดจบ" />
+    <div className="board-marker start" style={markerPositions.start}><img src={asset('/รูปสถานที่สำคัญ/จุดเริ่มต้น.png')} alt="" /><small>B7 เริ่ม</small></div>
+    <div className="board-marker place" style={markerPositions.nongHan}><img src={asset('/รูปสถานที่สำคัญ/หนองหาร.png')} alt="" /><small>C2 หนองหาร</small></div>
+    <div className="board-marker obstacle" style={markerPositions.tree}><img src={asset('/รูปสถานที่สำคัญ/ต้นไม้.png')} alt="" /><small>E4 ต้นไม้</small></div>
+    <div className="board-marker place" style={markerPositions.pha}><img src={asset('/รูปสถานที่สำคัญ/ผานางเมิน ภูพาน.png')} alt="" /><small>F2 ผานางเมิน</small></div>
     <div className={`board-marker star ${starCollected ? 'collected' : ''}`} style={markerPositions.star}><span>{starCollected ? '✅' : '⭐'}</span><small>{starCollected ? 'H5 เก็บดาวแล้ว' : 'H5 เก็บดาว'}</small></div>
     <div className="board-marker finish" style={markerPositions.finish}><span>🏆</span><small>G7 จบ</small></div></>
   const withRobot = <>{content}{robot && <div className="board-robot" style={{ left: robot.left, top: robot.top }}><span>🤖</span><small>หุ่นยนต์</small></div>}</>
