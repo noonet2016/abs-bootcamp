@@ -57,3 +57,16 @@ Implementation complete for the first website artifact. Awaiting Trainer review 
 - Changed the robot demo command sequence from a fixed right-side panel into a floating draggable popup, so the board and controls can stay visually balanced.
 - Added pointer-drag state local to `RobotDemoModal` and responsive `vw`/`vh` sizing for the floating popup.
 - Verification: `npm run build` PASS; `npm test` PASS; dev server `http://127.0.0.1:5173/` returned HTTP 200.
+
+## 2026-08-28 — Viewport polish, board examples, and asset updates
+- Matched Knowledge and Mission header rhythm to the Home view and reduced content spacing so pages fit the viewport more consistently.
+- Adjusted Knowledge image sizing to preserve tall supplied card artwork while keeping the panel compact.
+- Added supplied nature images: `น้ำตกคำสร้าง ห้วยหวด ภูผายล.png`, `อุทยานแห่งชาติภูพาน.png`, and `อุทยานแห่งชาติภูผายล.png`.
+- Updated content mapping and audit notes for `น้ำตกคำน้ำสร้าง`, `อุทยานแห่งชาติภูพาน`, and `อุทยานแห่งชาติภูผายล`.
+- Removed the experimental Knowledge full-screen panel/image behavior after Trainer review.
+- Aligned the board-placement example popup with the robot demo example: same board, marker sizing, robot at start, and coordinate positions.
+- Reworked robot demo behavior so it starts paused, defaults to slow speed, supports manual `ก่อนหน้า`/`ถัดไป` step-by-step controls, and has a separate auto-play button.
+- Added destination coordinates to robot command text, for example `เดินขึ้น 1 ช่อง ไป B3` and `เดินลง 1 ช่อง ไป G7: ถึงจุดจบ!`.
+- Changed star-complete marker text to `H5 เก็บดาวแล้ว`.
+- Tuned robot demo popup height, title top spacing, controls bottom margin, slider width, and close-button positioning to fit the visible viewport.
+- Verification: `npm test` PASS; `npm run build` PASS with the existing Vite large-chunk warning for `AdventureScene`.

@@ -83,7 +83,24 @@ function Mission() {
 type RobotCommandKind = 'forward' | 'right' | 'down' | 'left' | 'star' | 'finish'
 type RobotPoint = { left: string; top: string; instruction: string; card: RobotCommandKind }
 const robotRoute: RobotPoint[] = [
-  { left: '28.9%', top: '77.7%', instruction: 'เริ่มที่ B7', card: 'forward' }, { left: '28.9%', top: '69.6%', instruction: 'เดินขึ้น 1 ช่อง', card: 'forward' }, { left: '28.9%', top: '61.5%', instruction: 'เดินขึ้น 1 ช่อง', card: 'forward' }, { left: '28.9%', top: '53.4%', instruction: 'เดินขึ้น 1 ช่อง', card: 'forward' }, { left: '28.9%', top: '45.3%', instruction: 'เดินขึ้น 1 ช่อง', card: 'forward' }, { left: '28.9%', top: '37.2%', instruction: 'เดินขึ้น 1 ช่อง', card: 'forward' }, { left: '38.6%', top: '37.2%', instruction: 'เดินขวา: ถึงหนองหาร', card: 'right' }, { left: '48.3%', top: '37.2%', instruction: 'เดินขวา 1 ช่อง', card: 'right' }, { left: '58%', top: '37.2%', instruction: 'เดินขวา: หลบต้นไม้ด้านล่าง', card: 'right' }, { left: '67.7%', top: '37.2%', instruction: 'เดินขวา: ถึงผานางเมิน', card: 'right' }, { left: '77.4%', top: '37.2%', instruction: 'เดินขวา 1 ช่อง', card: 'right' }, { left: '87.1%', top: '37.2%', instruction: 'เดินขวา 1 ช่อง', card: 'right' }, { left: '87.1%', top: '45.3%', instruction: 'เดินลง 1 ช่อง', card: 'down' }, { left: '87.1%', top: '53.4%', instruction: 'เดินลง 1 ช่อง', card: 'down' }, { left: '87.1%', top: '61.5%', instruction: 'เดินลง: เก็บดาว!', card: 'star' }, { left: '77.4%', top: '61.5%', instruction: 'เดินซ้าย 1 ช่อง', card: 'left' }, { left: '77.4%', top: '69.6%', instruction: 'เดินลง 1 ช่อง', card: 'down' }, { left: '77.4%', top: '77.7%', instruction: 'เดินลง: ถึงจุดจบ!', card: 'finish' },
+  { left: '28.9%', top: '77.7%', instruction: 'เริ่มที่ B7', card: 'forward' },
+  { left: '28.9%', top: '69.6%', instruction: 'เดินขึ้น 1 ช่อง ไป B6', card: 'forward' },
+  { left: '28.9%', top: '61.5%', instruction: 'เดินขึ้น 1 ช่อง ไป B5', card: 'forward' },
+  { left: '28.9%', top: '53.4%', instruction: 'เดินขึ้น 1 ช่อง ไป B4', card: 'forward' },
+  { left: '28.9%', top: '45.3%', instruction: 'เดินขึ้น 1 ช่อง ไป B3', card: 'forward' },
+  { left: '28.9%', top: '37.2%', instruction: 'เดินขึ้น 1 ช่อง ไป B2', card: 'forward' },
+  { left: '38.6%', top: '37.2%', instruction: 'เดินขวา 1 ช่อง ไป C2: ถึงหนองหาร', card: 'right' },
+  { left: '48.3%', top: '37.2%', instruction: 'เดินขวา 1 ช่อง ไป D2', card: 'right' },
+  { left: '58%', top: '37.2%', instruction: 'เดินขวา 1 ช่อง ไป E2: หลบต้นไม้ด้านล่าง', card: 'right' },
+  { left: '67.7%', top: '37.2%', instruction: 'เดินขวา 1 ช่อง ไป F2: ถึงผานางเมิน', card: 'right' },
+  { left: '77.4%', top: '37.2%', instruction: 'เดินขวา 1 ช่อง ไป G2', card: 'right' },
+  { left: '87.1%', top: '37.2%', instruction: 'เดินขวา 1 ช่อง ไป H2', card: 'right' },
+  { left: '87.1%', top: '45.3%', instruction: 'เดินลง 1 ช่อง ไป H3', card: 'down' },
+  { left: '87.1%', top: '53.4%', instruction: 'เดินลง 1 ช่อง ไป H4', card: 'down' },
+  { left: '87.1%', top: '61.5%', instruction: 'เดินลง 1 ช่อง ไป H5: เก็บดาว!', card: 'star' },
+  { left: '77.4%', top: '61.5%', instruction: 'เดินซ้าย 1 ช่อง ไป G5', card: 'left' },
+  { left: '77.4%', top: '69.6%', instruction: 'เดินลง 1 ช่อง ไป G6', card: 'down' },
+  { left: '77.4%', top: '77.7%', instruction: 'เดินลง 1 ช่อง ไป G7: ถึงจุดจบ!', card: 'finish' },
 ]
 
 const commandCardImages: Record<RobotCommandKind, string> = {
@@ -99,13 +116,13 @@ function BoardExample({ className = '', onClick, robot, starCollected = false }:
   const isRobotDemo = className.split(' ').includes('robot-board-image')
   const markerPositions = isRobotDemo
     ? { nongHan: { left: '38.6%', top: '37.2%' }, tree: { left: '58%', top: '53.4%' }, pha: { left: '67.7%', top: '37.2%' }, start: { left: '28.9%', top: '77.7%' }, star: { left: '87.1%', top: '61.5%' }, finish: { left: '77.4%', top: '77.7%' } }
-    : { nongHan: { left: '38.6%', top: '45.3%' }, tree: { left: '48.3%', top: '53.4%' }, pha: { left: '67.7%', top: '37.2%' }, start: { left: '28.9%', top: '77.7%' }, star: { left: '87.1%', top: '61.5%' }, finish: { left: '77.4%', top: '77.7%' } }
+    : { nongHan: { left: '38.6%', top: '37.2%' }, tree: { left: '58%', top: '53.4%' }, pha: { left: '67.7%', top: '37.2%' }, start: { left: '28.9%', top: '77.7%' }, star: { left: '87.1%', top: '61.5%' }, finish: { left: '77.4%', top: '77.7%' } }
   const content = <><img src="/พื้นที่เกม.png" alt="ตัวอย่างกระดาน 8 คูณ 8 ที่วางจุดเริ่มต้น หนองหาร ต้นไม้ ดาว ผานางเมิน และจุดจบ" />
     <div className="board-marker start" style={markerPositions.start}><img src="/รูปสถานที่สำคัญ/จุดเริ่มต้น.png" alt="" /><small>B7 เริ่ม</small></div>
     <div className="board-marker place" style={markerPositions.nongHan}><img src="/รูปสถานที่สำคัญ/หนองหาร.png" alt="" /><small>C2 หนองหาร</small></div>
     <div className="board-marker obstacle" style={markerPositions.tree}><img src="/รูปสถานที่สำคัญ/ต้นไม้.png" alt="" /><small>E4 ต้นไม้</small></div>
     <div className="board-marker place" style={markerPositions.pha}><img src="/รูปสถานที่สำคัญ/ผานางเมิน ภูพาน.png" alt="" /><small>F2 ผานางเมิน</small></div>
-    <div className={`board-marker star ${starCollected ? 'collected' : ''}`} style={markerPositions.star}><span>{starCollected ? '✅' : '⭐'}</span><small>{starCollected ? 'H5 เก็บแล้ว' : 'H5 เก็บดาว'}</small></div>
+    <div className={`board-marker star ${starCollected ? 'collected' : ''}`} style={markerPositions.star}><span>{starCollected ? '✅' : '⭐'}</span><small>{starCollected ? 'H5 เก็บดาวแล้ว' : 'H5 เก็บดาว'}</small></div>
     <div className="board-marker finish" style={markerPositions.finish}><span>🏆</span><small>G7 จบ</small></div></>
   const withRobot = <>{content}{robot && <div className="board-robot" style={{ left: robot.left, top: robot.top }}><span>🤖</span><small>หุ่นยนต์</small></div>}</>
   if (onClick) return <button type="button" className={`board-demo-image ${className}`} aria-label="ขยายตัวอย่างกระดานเต็มหน้าจอ" onClick={onClick}>{withRobot}</button>
@@ -113,23 +130,21 @@ function BoardExample({ className = '', onClick, robot, starCollected = false }:
 }
 
 function BoardDemoModal({ onClose }: { onClose: () => void }) {
-  const [isFullscreen, setFullscreen] = useState(false)
   return <div className="mission-backdrop" role="presentation" onMouseDown={onClose}>
     <motion.div className="board-demo-modal" role="dialog" aria-modal="true" aria-labelledby="board-demo-title" initial={{ opacity: 0, scale: .94, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} onMouseDown={(event) => event.stopPropagation()}>
       <button type="button" className="modal-close" aria-label="ปิดตัวอย่างการวางรูป" onClick={onClose}>×</button>
       <h2 id="board-demo-title">ตัวอย่างการวางภารกิจบนกระดาน</h2>
       <p>วางรูปสถานที่ ดาว และสิ่งกีดขวางลงตามช่อง แล้วให้ทีมเลือกเส้นทางเดินเองค่ะ</p>
-      <BoardExample onClick={() => setFullscreen(true)} />
+      <BoardExample className="robot-board-image board-example-robot-copy" robot={robotRoute[0]} />
       <p className="board-demo-note">นี่เป็นตัวอย่างเท่านั้น — ทีมสามารถวางรูปและออกแบบเส้นทางใหม่ได้เอง</p>
     </motion.div>
-    {isFullscreen && <div className="board-fullscreen" role="dialog" aria-modal="true" aria-label="ตัวอย่างกระดานแบบเต็มหน้าจอ" onMouseDown={(event) => { event.stopPropagation(); setFullscreen(false) }}><button type="button" className="modal-close board-fullscreen-close" aria-label="ปิดภาพเต็มหน้าจอ" onClick={() => setFullscreen(false)}>×</button><div onMouseDown={(event) => event.stopPropagation()}><BoardExample className="board-fullscreen-image" /></div></div>}
   </div>
 }
 
 function RobotDemoModal({ onClose }: { onClose: () => void }) {
   const [step, setStep] = useState(0)
-  const [isPlaying, setPlaying] = useState(true)
-  const [speedLevel, setSpeedLevel] = useState(6)
+  const [isPlaying, setPlaying] = useState(false)
+  const [speedLevel, setSpeedLevel] = useState(1)
   const currentStepRef = useRef<HTMLLIElement>(null)
   const shouldReduceMotion = useReducedMotion()
   const current = robotRoute[step]
@@ -147,8 +162,11 @@ function RobotDemoModal({ onClose }: { onClose: () => void }) {
     currentStepRef.current?.scrollIntoView({ behavior: shouldReduceMotion ? 'auto' : 'smooth', block: 'center' })
   }, [shouldReduceMotion, step])
 
-  const replay = () => { setStep(0); setPlaying(true) }
+  const replay = () => { setStep(0); setPlaying(false) }
   const stop = () => { setStep(0); setPlaying(false) }
+  const previousStep = () => { setPlaying(false); setStep((value) => Math.max(0, value - 1)) }
+  const nextStep = () => { setPlaying(false); setStep((value) => Math.min(robotRoute.length - 1, value + 1)) }
+  const playAuto = () => setPlaying(true)
   return <div className="mission-backdrop robot-backdrop" role="presentation" onMouseDown={onClose}>
     <motion.div className="robot-demo-modal" role="dialog" aria-modal="true" aria-labelledby="robot-demo-title" initial={{ opacity: 0, scale: .94, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} onMouseDown={(event) => event.stopPropagation()}>
       <button type="button" className="modal-close" aria-label="ปิดตัวอย่างหุ่นยนต์เดิน" onClick={onClose}>×</button>
@@ -158,7 +176,7 @@ function RobotDemoModal({ onClose }: { onClose: () => void }) {
         <div className="robot-board-wrap"><BoardExample className="robot-board-image" robot={current} starCollected={starCollected} /></div>
         <aside className="robot-card-column" aria-label="การ์ดลำดับคำสั่งของหุ่นยนต์"><h3 className="robot-card-title">การ์ดคำสั่ง</h3><div className="robot-card-sequence"><ol>{robotRoute.slice(1).map((point, index) => { const routeIndex = index + 1; return <li key={`${point.left}-${point.top}-${index}`} ref={routeIndex === step ? currentStepRef : undefined} className={routeIndex < step ? 'completed' : routeIndex === step ? 'current' : ''} aria-current={routeIndex === step ? 'step' : undefined}><span>{routeIndex}</span><img src={commandCardImages[point.card]} alt={point.instruction} /><p>{point.instruction}</p></li> })}</ol></div></aside>
       </div>
-      <div className="robot-controls"><label className="speed-control"><span>ช้า</span><input type="range" min="1" max="10" step="1" value={speedLevel} onChange={(event) => setSpeedLevel(Number(event.currentTarget.value))} aria-label="ปรับความเร็วการเดินของหุ่นยนต์ ซ้ายช้า ขวาเร็ว" /><span>เร็ว</span><small>{speedLevel <= 3 ? 'ช้า' : speedLevel >= 8 ? 'เร็ว' : 'ปานกลาง'}</small></label><div className="icon-controls" aria-label="ควบคุมตัวอย่างหุ่นยนต์"><button type="button" className="icon-button play" aria-label="เล่น" onClick={() => setPlaying(true)}>▶</button><button type="button" className="icon-button pause" aria-label="หยุดชั่วคราว" onClick={() => setPlaying(false)}>⏸</button><button type="button" className="icon-button stop" aria-label="หยุดและกลับจุดเริ่มต้น" onClick={stop}>■</button><button type="button" className="icon-button reset" aria-label="เริ่มตัวอย่างใหม่" onClick={replay}>↻</button></div></div>
+      <div className="robot-controls"><label className="speed-control"><span>ช้า</span><input type="range" min="1" max="10" step="1" value={speedLevel} onChange={(event) => setSpeedLevel(Number(event.currentTarget.value))} aria-label="ปรับความเร็วการเดินของหุ่นยนต์ ซ้ายช้า ขวาเร็ว" /><span>เร็ว</span></label><div className="icon-controls" aria-label="ควบคุมตัวอย่างหุ่นยนต์"><button type="button" className="step-button" aria-label="ย้อนกลับหนึ่งขั้น" onClick={previousStep} disabled={step === 0}>ก่อนหน้า</button><button type="button" className="step-button" aria-label="ดูขั้นถัดไป" onClick={nextStep} disabled={step === robotRoute.length - 1}>ถัดไป</button><button type="button" className="icon-button play" aria-label="เล่นอัตโนมัติ" onClick={playAuto}>▶<span>อัตโนมัติ</span></button><button type="button" className="icon-button pause" aria-label="หยุดชั่วคราว" onClick={() => setPlaying(false)}>⏸</button><button type="button" className="icon-button stop" aria-label="หยุดและกลับจุดเริ่มต้น" onClick={stop}>■</button><button type="button" className="icon-button reset" aria-label="เริ่มตัวอย่างใหม่" onClick={replay}>↻</button></div></div>
     </motion.div>
   </div>
 }
@@ -167,7 +185,7 @@ export default function App() {
   const [view, setView] = useState<View>('home')
   const [isBoardDemoOpen, setBoardDemoOpen] = useState(false)
   const [isRobotDemoOpen, setRobotDemoOpen] = useState(false)
-  return <MotionConfig reducedMotion="user"><main className={view === 'home' ? 'home-view' : undefined}>
+  return <MotionConfig reducedMotion="user"><main className={`${view}-view`}>
     <header className="hero"><Suspense fallback={null}><AdventureScene /></Suspense><div className="hero-content"><p className="eyebrow">ABS BOOTCAMP · UNPLUGGED</p><h1>ตะลุย <em>แดน 3 ธรรม</em></h1><p className="hero-copy">เรียนรู้สกลนคร แล้วออกแบบคำสั่งให้หุ่นยนต์ของทีม<span className="keep-line">เดินบนกระดานจริง</span></p><div className="hero-actions"><button type="button" className="primary-button" onClick={() => setView('knowledge')}>เริ่มเรียนรู้</button><button type="button" className="ghost-button" onClick={() => setView('mission')}>สุ่มภารกิจ</button></div></div></header>
     <nav aria-label="เมนูหลัก"><button type="button" aria-current={view === 'home' ? 'page' : undefined} onClick={() => setView('home')}>หน้าแรก</button><button type="button" aria-current={view === 'knowledge' ? 'page' : undefined} onClick={() => setView('knowledge')}>1. เรียนรู้</button><button type="button" aria-current={view === 'mission' ? 'page' : undefined} onClick={() => setView('mission')}>2. สุ่มภารกิจ</button></nav>
     {view === 'home' && <section className="home-intro"><h2><span className="home-heading-line">ดูข้อมูลก่อน แล้วไปทำภารกิจบนกระดานจริง</span></h2><div className="home-steps"><button type="button" className="flow-step" onClick={() => setView('knowledge')}><b>1</b><span>เรียนรู้สถานที่</span><small>กดเพื่อเริ่มเรียนรู้</small></button><button type="button" className="flow-step" onClick={() => setView('mission')}><b>2</b><span>สุ่มภารกิจทีม</span><small>กดเพื่อสุ่มภารกิจ</small></button><button type="button" className="flow-step" onClick={() => setBoardDemoOpen(true)}><b>3</b><span>วางรูปบนตาราง</span><small>ดูตัวอย่างการวาง</small></button><button type="button" className="flow-step" onClick={() => setRobotDemoOpen(true)}><b>4</b><span>สั่งหุ่นยนต์เดิน</span><small>ดูตัวอย่างการเดิน</small></button></div></section>}

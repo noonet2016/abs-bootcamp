@@ -22,12 +22,12 @@
 | `wat-tham-kham` | dhamma | วัดถ้ำขาม | `วัดถ้ำขาม.png` | ready |
 | `wat-pa-nak-nimit` | dhamma | วัดป่านาคนิมิตต์ | `วัดป่านาคนิมิตต์.png` | ready; verified in a provincial Office of Buddhism record. |
 | `nong-han` | nature | หนองหาร | `หนองหาร.png` | ready |
-| `phu-phan-park` | nature | อุทยานแห่งชาติภูพาน | — | knowledge-only unless a new card is supplied |
-| `kham-nam-sang-waterfall` | nature | น้ำตกคำน้ำสร้าง | — | **needs image**; correct label for mission 9 / knowledge text |
+| `phu-phan-park` | nature | อุทยานแห่งชาติภูพาน | `อุทยานแห่งชาติภูพาน.png` | ready with supplied asset |
+| `kham-nam-sang-waterfall` | nature | น้ำตกคำน้ำสร้าง | `น้ำตกคำสร้าง ห้วยหวด ภูผายล.png` | ready with supplied asset and corrected display label |
 | `pha-nang-moen` | nature | ผานางเมิน | `ผานางเมิน ภูพาน.png` | ready |
 | `khong-ping-ngu` | nature | โค้งปิ้งงู | `โค้งปิ้งงู.png` | ready |
 | `bua-chaloem-phrakiat-park` | nature | อุทยานบัวเฉลิมพระเกียรติ | `อุทยานบัว.png` | ready with asset alias |
-| `phu-phayon-park` | nature | อุทยานแห่งชาติภูผายล | `ภูผายน.png` | ready with corrected display label and asset alias |
+| `phu-phayon-park` | nature | อุทยานแห่งชาติภูผายล | `อุทยานแห่งชาติภูผายล.png` | ready with supplied corrected asset; `ภูผายน.png` retained as source alias |
 | `huai-huat-reservoir` | nature | อ่างเก็บน้ำห้วยหวด | — | **needs image**; appears in mission 9 only |
 | `wax-castle-parade` | culture | ประเพณีแห่ปราสาทผึ้ง | `แห่ปราสาทผึ้ง.png` | ready |
 | `sakonnakhon-indigo` | culture | ผ้าย้อมครามสกลนคร | choose one: `ผ้าคราม.png` or `ผ้าย้อมคราม.png` | needs visual/content-owner choice; files are different, not duplicates |
@@ -113,6 +113,6 @@ The random-draw function should choose uniformly from IDs 1–20. It should show
 ## Open content-owner decisions
 
 1. Select the intended primary image between `ผ้าคราม.png` and `ผ้าย้อมคราม.png`; both are distinct files and neither filename alone establishes which represents Ban Don Koi.
-2. Supply or approve representative artwork for `น้ำตกคำน้ำสร้าง`, `อ่างเก็บน้ำห้วยหวด`, and `ภูไท`; otherwise missions can show labelled placeholders rather than imply that an image card exists.
+2. Supply or approve representative artwork for `อ่างเก็บน้ำห้วยหวด` and `ภูไท`; otherwise missions can show labelled placeholders rather than imply that an image card exists. `น้ำตกคำน้ำสร้าง` now has the supplied image `น้ำตกคำสร้าง ห้วยหวด ภูผายล.png`.
 3. Confirm whether physical star and finish cards exist outside this directory. The digital view can provide them, but the unplugged kit needs actual tokens.
 4. Confirm the locally preferred spelling of `วัดถ้ำผาแด่น` versus the TAT spelling `วัดถ้ำผาเด่น` before publishing a formal factual description.
