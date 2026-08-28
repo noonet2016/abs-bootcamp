@@ -52,3 +52,8 @@ Implementation complete for the first website artifact. Awaiting Trainer review 
 - Several place names in the route document do not exactly match the available image filenames; a content mapping will be needed.
 - Three mission locations have no matching supplied image and intentionally render a clear labelled placeholder.
 - The supplied large PNG files are used as local static assets and should be optimized for production after Trainer selects final imagery.
+
+## 2026-08-28 — Robot flow popup layout
+- Changed the robot demo command sequence from a fixed right-side panel into a floating draggable popup, so the board and controls can stay visually balanced.
+- Added pointer-drag state local to `RobotDemoModal` and responsive `vw`/`vh` sizing for the floating popup.
+- Verification: `npm run build` PASS; `npm test` PASS; dev server `http://127.0.0.1:5173/` returned HTTP 200.
