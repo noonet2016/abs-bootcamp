@@ -70,3 +70,12 @@ Implementation complete for the first website artifact. Awaiting Trainer review 
 - Changed star-complete marker text to `H5 เก็บดาวแล้ว`.
 - Tuned robot demo popup height, title top spacing, controls bottom margin, slider width, and close-button positioning to fit the visible viewport.
 - Verification: `npm test` PASS; `npm run build` PASS with the existing Vite large-chunk warning for `AdventureScene`.
+
+## 2026-08-29 — Deployment preparation checkpoint
+- Converted navigation items `3. วางรูปบนตาราง` and `4. สั่งหุ่นยนต์เดิน` into first-class page views before opening their demo popups.
+- Removed hero CTA buttons and the `ABS BOOTCAMP · UNPLUGGED` eyebrow so the top area is cleaner and navigation is the primary route.
+- Tuned Home card height, typography, line spacing, and vertical placement based on Trainer screenshots.
+- Fixed menu active behavior to follow the selected page view.
+- Tuned Mission result presentation: reroll animation duration, star card coloring, six-chip row wrapping, row centering, and close-button placement.
+- Prepared deployment notes in `CHECKPOINT.md` for static `dist/` upload, rollback, and smoke checks.
+- Verification: `npm test` PASS; `npm run build` PASS with the existing Vite large-chunk warning for `AdventureScene`.

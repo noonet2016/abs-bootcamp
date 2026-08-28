@@ -20,7 +20,7 @@ main { overflow: hidden; min-height: 100vh; }
 .primary-button, .secondary-button, .ghost-button, .reset-button { border: 0; border-radius: 999px; min-height: 50px; padding: 12px 22px; font-weight: 800; transition: transform .2s, box-shadow .2s; }
 .primary-button { color: #16354a; background: #ffd449; box-shadow: 0 5px 0 #e69d1e; } .primary-button:hover { transform: translateY(-3px); box-shadow: 0 8px 0 #e69d1e; }
 .ghost-button { color: white; background: transparent; border: 2px solid rgba(255,255,255,.8); } .ghost-button:hover { background: rgba(255,255,255,.14); }
-nav { width: min(94%, 720px); margin: -29px auto 0; position: relative; z-index: 2; background: white; border-radius: 999px; padding: 8px; box-shadow: 0 9px 25px rgba(20, 65, 74, .17); display: flex; justify-content: center; gap: 6px; }
+nav { width: min(96%, 1160px); margin: -29px auto 0; position: relative; z-index: 2; background: white; border-radius: 999px; padding: 8px; box-shadow: 0 9px 25px rgba(20, 65, 74, .17); display: flex; justify-content: center; gap: 6px; }
 nav button { border: 0; border-radius: 999px; padding: 10px 16px; color: #31536b; background: transparent; font-weight: 700; } nav button[aria-current="page"] { color: white; background: #193f5a; }
 .home-intro, .panel { width: min(1100px, 92%); margin: 72px auto; }.home-intro { width: min(1520px, 96%); margin-bottom: 38px; text-align: center; }.home-intro h2, .section-heading h2 { font-family: Mali, Tahoma, sans-serif; font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.05; margin: 8px 0 18px; }.home-intro .eyebrow,.section-heading>span { color: #4d7d67; }
 .home-intro h2 { font-size: clamp(1.9rem, 3.5vw, 3.05rem); }
@@ -30,6 +30,12 @@ nav button { border: 0; border-radius: 999px; padding: 10px 16px; color: #31536b
 .panel { background: rgba(255,255,255,.86); padding: clamp(24px, 5vw, 52px); border-radius: 32px; box-shadow: 0 15px 35px rgba(33, 89, 81, .12); }.section-heading { text-align: center; max-width: 700px; margin: auto; }.section-heading p { margin-top: 0; line-height: 1.6; }
 .realm-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 35px 0 20px; }.realm-tab { border: 0; border-radius: 18px; padding: 16px 10px; font-weight: 800; color: #19324a; background: #eef4ee; }.realm-tab.gold { background: #fff2bc; }.realm-tab.leaf { background: #dff2db; }.realm-tab.indigo { background: #e4e5ff; }.realm-tab[aria-selected="true"] { outline: 4px solid #193f5a; transform: translateY(-2px); }
 .place-card { background: #f7fbfa; border: 2px dashed #b8d8cd; border-radius: 26px; overflow: hidden; display: grid; grid-template-columns: minmax(260px,.9fr) 1.1fr; }.place-image { min-height: 290px; background: #d2e8df; }.place-image img { display: block; width: 100%; height: 100%; object-fit: cover; }.image-placeholder { height: 100%; min-height: 290px; display: grid; place-items: center; align-content: center; gap: 8px; font-size: 3.4rem; color: #426b68; }.image-placeholder small { font-size: 1rem; }.place-copy { padding: clamp(24px, 4vw, 42px); }.realm-label { display: inline-block; padding: 6px 11px; border-radius: 999px; font-weight: 800; }.realm-label.gold { background: #fff1b4; }.realm-label.leaf { background: #d8f0d4; }.realm-label.indigo { background: #e1e4ff; }.place-copy h3, .mission-brief h3 { font-size: clamp(1.7rem,3.2vw,2.6rem); line-height: 1.2; margin: 16px 0 12px; }.place-copy p { font-size: 1.1rem; line-height: 1.75; }.place-controls { border-top: 1px solid #c9ded6; margin-top: 24px; padding-top: 18px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }.place-controls button { color: #275d59; border: 0; background: transparent; padding: 8px; font-weight: 800; }.knowledge > .primary-button { margin: 30px auto 0; display: block; }
+.mission-image-strip { display: flex; gap: 12px; margin: 22px auto 8px; padding: 4px 2px 10px; overflow-x: auto; justify-content: center; }
+.mission-image-card { flex: 0 0 clamp(76px, 9vw, 116px); min-width: 0; margin: 0; padding: 6px; border-radius: 16px; background: rgba(255,255,255,.76); box-shadow: 0 4px 0 rgba(26,63,74,.12); text-align: center; overflow: hidden; }
+.mission-image-card img { display: block; width: 100%; max-width: 100%; height: clamp(64px, 7vw, 104px); border-radius: 11px; object-fit: contain; object-position: center; }
+.mission-image-card figcaption { margin-top: 5px; color: #31586a; font-size: clamp(.66rem, .8vw, .82rem); font-weight: 800; line-height: 1.15; }
+.mission-image-card.avoid { background: #ffe4dc; }
+.mission-image-card.star { background: linear-gradient(180deg, #fff3b0, #ffd45a); border-color: #f0ad25; box-shadow: 0 5px 0 #d8931d; }
 .draw-stage { text-align: center; padding: 15px 0 20px; }.compass { margin: 24px auto 12px; width: 148px; height: 148px; display: grid; place-items: center; border-radius: 50%; font-size: 5.4rem; background: conic-gradient(#ffd449, #53a26d, #5a63c9, #ffd449); box-shadow: inset 0 0 0 12px #fff, 0 12px 24px rgba(48,92,91,.2); }.compass.spinning { animation: spin .72s cubic-bezier(.2,.8,.2,1); }.draw-button { font-size: 1.25rem; margin-top: 12px; }.draw-button:disabled { cursor: wait; opacity: .75; }.mission-brief { border-radius: 28px; padding: clamp(22px, 5vw, 45px); color: #18354a; background: #fff8da; border: 5px solid #f3ca53; box-shadow: 0 13px 0 #e2af36; }.mission-brief.leaf { background: #e6f8e3; border-color: #78b967; box-shadow: 0 13px 0 #4d9661; }.mission-brief.indigo { background: #eceeff; border-color: #7882d5; box-shadow: 0 13px 0 #515db3; }.mission-brief.mixed { background: #f8eaff; border-color: #c97ed1; box-shadow: 0 13px 0 #a45eb0; }.mission-topline { font-weight: 800; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }.route-list { list-style: none; display: flex; gap: 9px; flex-wrap: wrap; padding: 0; margin: 26px 0; }.route-list li { background: white; border-radius: 14px; padding: 10px 12px; font-weight: 800; box-shadow: 0 3px 0 rgba(26,63,74,.14); }.route-list li.avoid { background: #ffe4dc; }.route-list li.star { background: #fff5a8; }.ready-check { border-radius: 18px; background: rgba(255,255,255,.7); padding: 18px 21px; line-height: 1.7; }.ready-check ol { margin: 8px 0 0; padding-left: 25px; }.secondary-button { margin-top: 24px; color: white; background: #193f5a; box-shadow: 0 4px 0 #0f2b42; }.secondary-button:hover { transform: translateY(-2px); }.reset-button { margin: 38px auto 0; display: block; color: #193f5a; background: transparent; border: 2px solid #193f5a; }
 .mission-backdrop { position: fixed; z-index: 20; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(12, 45, 63, .24); backdrop-filter: blur(2px); }.mission-modal { width: min(1320px, 94vw); max-height: min(91vh, 1040px); overflow: auto; position: relative; filter: drop-shadow(0 24px 45px rgba(11, 37, 54, .36)); }.mission-modal .mission-brief { margin: 0; padding: clamp(38px, 5vw, 68px); }.mission-modal .mission-topline { font-size: 1.28rem; }.mission-modal .mission-brief h3 { font-size: clamp(2.45rem, 5vw, 3.85rem); text-align: center; }.mission-modal .route-list { gap: 15px; }.mission-modal .route-list li { padding: 16px 20px; font-size: 1.3rem; }.mission-modal .ready-check { padding: 30px 34px; font-size: 1.45rem; }.mission-modal .ready-check strong { font-size: 1.2em; }.mission-modal .secondary-button { display: block; margin: 28px auto 0; font-size: 1.28rem; min-height: 64px; }.modal-close { position: sticky; z-index: 1; float: right; top: 18px; right: 18px; width: 58px; height: 58px; border: 0; border-radius: 50%; color: #17364d; background: rgba(255,255,255,.92); font-size: 2.5rem; font-weight: 800; line-height: 1; box-shadow: 0 3px 10px rgba(15,41,57,.2); }.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .robot-backdrop { padding: 0; }
@@ -43,21 +49,21 @@ footer { padding: 24px 24px 40px; text-align: center; font-size: 1.08rem; color:
 .home-view .hero-actions { margin-top: clamp(10px, 1.05vw, 18px); }
 .home-view .primary-button,
 .home-view .ghost-button { min-height: clamp(42px, 3vw, 50px); padding: clamp(9px, .8vw, 12px) clamp(18px, 1.45vw, 22px); }
-.home-view nav { margin-top: clamp(-29px, -1.55vw, -20px); }
-.home-view .home-intro { margin-top: clamp(28px, 3.1vw, 56px); margin-bottom: clamp(12px, 1.5vw, 28px); }
+.home-view nav { width: min(96%, 1160px); margin-top: clamp(-29px, -1.55vw, -20px); }
+.home-view .home-intro { margin-top: clamp(18px, 2.2vw, 40px); margin-bottom: clamp(6px, .8vw, 14px); }
 .home-view .home-intro h2 { font-size: clamp(1.55rem, 2.65vw, 2.85rem); margin: 0 0 clamp(12px, 1.2vw, 20px); }
-.home-view .home-steps { gap: clamp(18px, 2.7vw, 44px); margin-top: clamp(16px, 1.7vw, 28px); }
-.home-view .flow-step { border-radius: clamp(22px, 1.7vw, 32px); padding: clamp(18px, 1.85vw, 32px) clamp(14px, 1.25vw, 24px); min-height: clamp(160px, 12.1vw, 222px); gap: clamp(6px, .6vw, 10px); }
+.home-view .home-steps { gap: clamp(18px, 2.7vw, 44px); margin-top: clamp(24px, 2.4vw, 42px); }
+.home-view .flow-step { border-radius: clamp(22px, 1.7vw, 32px); padding: clamp(28px, 2.8vw, 48px) clamp(16px, 1.4vw, 28px); min-height: clamp(230px, 16.8vw, 310px); gap: clamp(8px, .8vw, 14px); }
 .home-view .flow-step:not(:last-child)::after { left: calc(100% + clamp(4px, .65vw, 12px)); width: clamp(18px, 1.45vw, 28px); font-size: clamp(1.6rem, 2vw, 2.5rem); }
-.home-view .home-steps b { width: clamp(52px, 4.2vw, 72px); height: clamp(52px, 4.2vw, 72px); font-size: clamp(1.55rem, 1.8vw, 2.1rem); }
-.home-view .home-steps span { font-size: clamp(1.03rem, 1.22vw, 1.32rem); }
-.home-view .flow-step small { font-size: clamp(.78rem, .82vw, .9rem); }
+.home-view .home-steps b { width: clamp(62px, 5vw, 88px); height: clamp(62px, 5vw, 88px); font-size: clamp(1.85rem, 2.25vw, 2.55rem); }
+.home-view .home-steps span { font-size: clamp(1.22rem, 1.48vw, 1.62rem); line-height: 1.2; }
+.home-view .flow-step small { font-size: clamp(.92rem, 1vw, 1.08rem); line-height: 1.28; }
 .home-view footer { margin-top: auto; padding: clamp(10px, 1.25vw, 20px) 24px clamp(14px, 1.6vw, 28px); font-size: clamp(.88rem, .9vw, 1.02rem); }
 @media (max-height: 760px) and (min-width: 851px) {
   .home-view .hero { min-height: clamp(190px, 15.5vw, 280px); padding-bottom: clamp(36px, 2.5vw, 46px); }
   .home-view .home-intro { margin-top: clamp(18px, 2.2vw, 38px); }
   .home-view .home-steps { margin-top: clamp(10px, 1.1vw, 18px); }
-  .home-view .flow-step { min-height: clamp(140px, 10.2vw, 185px); padding-top: clamp(14px, 1.35vw, 24px); padding-bottom: clamp(14px, 1.35vw, 24px); }
+  .home-view .flow-step { min-height: clamp(190px, 13.8vw, 250px); padding-top: clamp(20px, 2vw, 32px); padding-bottom: clamp(20px, 2vw, 32px); }
 }
 @keyframes spin { to { transform: rotate(720deg); } }
 
@@ -98,7 +104,7 @@ footer { padding: 24px 24px 40px; text-align: center; font-size: 1.08rem; color:
 .knowledge-view .hero-actions, .mission-view .hero-actions { margin-top: clamp(10px, 1.05vw, 18px); }
 .knowledge-view .primary-button, .knowledge-view .ghost-button,
 .mission-view .primary-button, .mission-view .ghost-button { min-height: clamp(42px, 3vw, 50px); padding: clamp(9px, .8vw, 12px) clamp(18px, 1.45vw, 22px); }
-.knowledge-view nav, .mission-view nav { margin-top: clamp(-29px, -1.55vw, -20px); }
+.knowledge-view nav, .mission-view nav { width: min(96%, 1160px); margin-top: clamp(-29px, -1.55vw, -20px); }
 .knowledge-view .panel, .mission-view .panel { width: min(1180px, 94%); margin-top: clamp(22px, 2.2vw, 40px); margin-bottom: clamp(10px, 1.4vw, 24px); padding: clamp(18px, 2.2vw, 34px); }
 .knowledge-view .section-heading h2, .mission-view .section-heading h2 { font-size: clamp(1.5rem, 2.35vw, 2.35rem); margin: 0 0 clamp(6px, .6vw, 10px); }
 .knowledge-view .section-heading p, .mission-view .section-heading p { margin-bottom: 0; font-size: clamp(.88rem, .95vw, 1rem); line-height: 1.45; }
@@ -193,3 +199,136 @@ footer { padding: 24px 24px 40px; text-align: center; font-size: 1.08rem; color:
 .robot-demo-modal { padding-top: clamp(34px, 4vh, 56px); }
 .robot-demo-modal h2 { margin-top: clamp(8px, 1.2vh, 18px); }
 @media (max-height: 720px) and (min-width: 1001px) { .robot-demo-modal { padding-top: clamp(24px, 3.2vh, 38px); } }
+
+@media (max-width: 900px) { .mission-modal .route-list { justify-content: flex-start; } }
+
+/* Keep the mission panel inside the viewport after adding mission images. */
+.mission-modal { max-height: calc(100dvh - 48px); overflow-y: auto; overscroll-behavior: contain; }
+.mission-modal .mission-brief { padding: clamp(24px, 3.2vw, 44px); }
+.mission-modal .mission-topline { padding-right: clamp(64px, 5vw, 88px); }
+.mission-modal .mission-brief h3 { margin-top: 8px; margin-bottom: 8px; }
+.mission-modal .mission-image-strip { gap: clamp(8px, .8vw, 12px); margin: 12px auto 4px; padding-bottom: 6px; }
+.mission-modal .mission-image-card { flex-basis: clamp(68px, 7vw, 94px); padding: 5px; }
+.mission-modal .mission-image-card figcaption { font-size: clamp(.58rem, .65vw, .72rem); }
+.mission-modal .ready-check { padding: 18px 24px; font-size: clamp(1rem, 1.15vw, 1.25rem); }
+.mission-modal .secondary-button { margin-top: 16px; min-height: 52px; }
+
+@media (max-width: 700px) {
+  .mission-backdrop { padding: 12px; }
+  .mission-modal { max-height: calc(100dvh - 24px); }
+  .mission-modal .mission-brief { padding: 24px 18px 28px; }
+  .mission-modal .mission-topline { padding-right: 54px; }
+  .mission-modal .mission-brief h3 { font-size: clamp(2rem, 10vw, 2.8rem); }
+  .mission-modal .mission-image-strip { justify-content: flex-start; }
+}
+
+.mission-modal .mission-brief { overflow: hidden; }
+
+
+
+@media (max-width: 1200px) {
+}
+@media (max-width: 800px) {
+}
+
+/* Mission popup route chips: max six per row, each row horizontally centered. */
+.mission-modal .route-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: flex-start;
+  gap: clamp(10px, 1vw, 16px) clamp(8px, .85vw, 14px);
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+  padding: 0;
+}
+.mission-modal .route-list li {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: clamp(10px, 1vw, 16px) clamp(12px, 1.1vw, 18px);
+  font-size: clamp(1rem, 1.25vw, 1.3rem);
+}
+.mission-modal .route-list .route-row-break {
+  flex-basis: 100%;
+  width: 0;
+  height: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  pointer-events: none;
+}
+
+/* Make collect-star mission chips stand out with a warmer golden card color. */
+.mission-modal .route-list li.star,
+.route-list li.star {
+  background: linear-gradient(180deg, #fff0a6, #ffd45a);
+  border: 2px solid #f0ad25;
+  box-shadow: 0 4px 0 #d8931d;
+}
+
+/* Visible reroll feedback inside the mission result popup. */
+.mission-brief { position: relative; }
+.reroll-button:disabled { cursor: wait; opacity: .85; }
+.mission-changing .mission-image-strip,
+.mission-changing .route-list,
+.mission-changing .ready-check,
+.mission-changing h3,
+.mission-changing .mission-topline { animation: mission-reroll-pulse .72s ease-in-out infinite alternate; }
+.mission-change-indicator { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; align-content: center; gap: 12px; border-radius: 24px; background: rgba(255,255,255,.42); backdrop-filter: blur(1px); pointer-events: none; color: #17364d; font-weight: 900; text-align: center; }
+.mission-change-indicator span { display: grid; place-items: center; width: 86px; height: 86px; border-radius: 50%; background: conic-gradient(#ffd449, #53a26d, #5a63c9, #ffd449); box-shadow: inset 0 0 0 9px white, 0 10px 22px rgba(48,92,91,.22); font-size: 3.3rem; animation: mission-reroll-spin .72s cubic-bezier(.2,.8,.2,1) infinite; }
+.mission-change-indicator b { padding: 10px 18px; border-radius: 999px; background: #fff7cc; box-shadow: 0 4px 0 #d69224; font-size: clamp(1.05rem, 1.4vw, 1.45rem); }
+@keyframes mission-reroll-spin { to { transform: rotate(360deg); } }
+@keyframes mission-reroll-pulse { to { opacity: .42; transform: scale(.985); } }
+@media (prefers-reduced-motion: reduce) { .mission-changing .mission-image-strip, .mission-changing .route-list, .mission-changing .ready-check, .mission-changing h3, .mission-changing .mission-topline, .mission-change-indicator span { animation: none; } }
+
+.mission-modal .modal-close { position: absolute; top: clamp(18px, 1.8vw, 30px); right: clamp(18px, 1.8vw, 30px); float: none; }
+
+nav button.active { color: white; background: #193f5a; }
+
+.board-view, .robot-view { min-height: 100dvh; display: flex; flex-direction: column; }
+.board-view .hero, .robot-view .hero { min-height: clamp(220px, 18vw, 330px); padding: clamp(18px, 1.7vw, 30px) 24px clamp(42px, 3vw, 54px); }
+.board-view .hero h1, .robot-view .hero h1 { font-size: clamp(2.15rem, 4.1vw, 3.85rem); margin: clamp(4px, .45vw, 8px) 0 clamp(8px, .7vw, 12px); }
+.board-view .hero-copy, .robot-view .hero-copy { font-size: clamp(.9rem, 1.15vw, 1.08rem); line-height: 1.42; }
+.board-view .hero-actions, .robot-view .hero-actions { margin-top: clamp(10px, 1.05vw, 18px); }
+.board-view nav, .robot-view nav { width: min(96%, 1160px); margin-top: clamp(-29px, -1.55vw, -20px); }
+.board-view .panel, .robot-view .panel { width: min(1180px, 94%); margin-top: clamp(22px, 2.2vw, 40px); margin-bottom: clamp(10px, 1.4vw, 24px); padding: clamp(18px, 2.2vw, 34px); }
+.activity-preview { display: grid; place-items: center; gap: clamp(12px, 1.2vw, 20px); padding: clamp(22px, 4vw, 54px) 0 clamp(18px, 3vw, 42px); text-align: center; }
+.activity-preview > span { display: grid; place-items: center; width: clamp(128px, 13vw, 190px); height: clamp(128px, 13vw, 190px); border-radius: 50%; background: conic-gradient(#ffd449, #53a26d, #5a63c9, #ffd449); box-shadow: inset 0 0 0 clamp(10px, 1vw, 15px) #fff, 0 12px 24px rgba(48,92,91,.2); font-size: clamp(4.2rem, 6vw, 6.4rem); }
+.activity-preview p { margin: 0; color: #31536b; font-size: clamp(1.05rem, 1.45vw, 1.45rem); font-weight: 700; }
+.board-view footer, .robot-view footer { margin-top: auto; padding: clamp(10px, 1.25vw, 20px) 24px clamp(14px, 1.6vw, 28px); font-size: clamp(.88rem, .9vw, 1.02rem); }
+@media (max-height: 760px) and (min-width: 851px) {
+  .board-view .hero, .robot-view .hero { min-height: clamp(190px, 15.5vw, 280px); padding-bottom: clamp(36px, 2.5vw, 46px); }
+  .activity-preview { padding-top: clamp(14px, 2vw, 32px); padding-bottom: clamp(12px, 2vw, 28px); }
+  .activity-preview > span { width: clamp(100px, 10vw, 150px); height: clamp(100px, 10vw, 150px); font-size: clamp(3.4rem, 5vw, 5rem); }
+}
+
+/* Match Board/Robot landing panel height behavior to Mission: compact and viewport-contained. */
+.board-view .panel, .robot-view .panel { flex: 0 1 auto; max-height: calc(100dvh - 360px); overflow: hidden; }
+.board-view .section-heading h2, .robot-view .section-heading h2 { font-size: clamp(1.5rem, 2.35vw, 2.35rem); margin: 0 0 clamp(6px, .6vw, 10px); }
+.board-view .section-heading p, .robot-view .section-heading p { margin-bottom: 0; font-size: clamp(.88rem, .95vw, 1rem); line-height: 1.45; }
+.board-view .activity-preview, .robot-view .activity-preview { padding: clamp(10px, 1.4vw, 22px) 0 clamp(8px, 1.2vw, 18px); gap: clamp(8px, 1vw, 14px); }
+.board-view .activity-preview > span, .robot-view .activity-preview > span { width: clamp(96px, 9.5vw, 140px); height: clamp(96px, 9.5vw, 140px); font-size: clamp(3.4rem, 5vw, 5rem); }
+.board-view .activity-preview p, .robot-view .activity-preview p { font-size: clamp(.98rem, 1.1vw, 1.18rem); }
+@media (max-height: 760px) and (min-width: 851px) {
+  .board-view .panel, .robot-view .panel { max-height: calc(100dvh - 315px); padding: clamp(14px, 1.8vw, 28px); }
+  .board-view .activity-preview > span, .robot-view .activity-preview > span { width: clamp(84px, 8vw, 116px); height: clamp(84px, 8vw, 116px); font-size: clamp(3rem, 4vw, 4.2rem); }
+}
+@media (max-width: 700px) { .board-view .panel, .robot-view .panel { max-height: none; overflow: visible; } }
+
+/* Tighten Home vertical rhythm: bring footer closer to the cards. */
+.home-view .home-intro { margin-bottom: 0; }
+.home-view footer { margin-top: clamp(20px, 3vh, 42px); }
+
+/* Keep Home footer anchored while moving the card group lower toward it. */
+.home-view .home-intro { margin-top: clamp(46px, 5.2vh, 78px); margin-bottom: 0; }
+.home-view footer { margin-top: auto; }
+
+.home-view .home-intro { margin-top: clamp(72px, 8vh, 120px); }
+
+.hero h1 { line-height: 1.08; }
+.hero h1 em { margin-top: .08em; }

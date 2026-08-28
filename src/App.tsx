@@ -9,7 +9,7 @@ import commandCardForward from './assets/command-cards/command-card-forward-prev
 import commandCardLeft from './assets/command-cards/command-card-left.png'
 import commandCardRight from './assets/command-cards/command-card-right.png'
 
-type View = 'home' | 'knowledge' | 'mission'
+type View = 'home' | 'knowledge' | 'mission' | 'board' | 'robot'
 
 const realmOrder: Realm[] = ['dhamma', 'nature', 'culture']
 const AdventureScene = lazy(async () => import('./AdventureScene').then((module) => ({ default: module.AdventureScene })))
@@ -40,14 +40,48 @@ function Knowledge({ onMission }: { onMission: () => void }) {
   )
 }
 
-function MissionBrief({ mission, onDrawAgain }: { mission: Mission; onDrawAgain: () => void }) {
+function MissionBrief({ mission, onDrawAgain, isDrawing }: { mission: Mission; onDrawAgain: () => void; isDrawing: boolean }) {
   const theme = mission.realm === 'mixed' ? 'mixed' : realms[mission.realm].color
-  return <article className={`mission-brief ${theme}`} aria-live="polite">
+  const missionImages: Record<string, string> = {
+    'เริ่มต้น': '/รูปสถานที่สำคัญ/จุดเริ่มต้น.png',
+    'พระธาตุเชิงชุม': '/รูปสถานที่สำคัญ/วัดพระธาตุเชิงชุม.png',
+    'วัดป่าสุทธาวาส': '/รูปสถานที่สำคัญ/วัดป่าสุทธาวาส.png',
+    'วัดถ้ำผาแด่น': '/รูปสถานที่สำคัญ/วัดถ้ำผาแด่น.png',
+    'วัดถ้ำขาม': '/รูปสถานที่สำคัญ/วัดถ้ำขาม.png',
+    'วัดป่านาคนิมิตต์': '/รูปสถานที่สำคัญ/วัดป่านาคนิมิตต์.png',
+    'หนองหาร': '/รูปสถานที่สำคัญ/หนองหาร.png',
+    'โค้งปิ้งงู': '/รูปสถานที่สำคัญ/โค้งปิ้งงู.png',
+    'ผานางเมิน': '/รูปสถานที่สำคัญ/ผานางเมิน ภูพาน.png',
+    'น้ำตกคำน้ำสร้าง': '/รูปสถานที่สำคัญ/น้ำตกคำสร้าง ห้วยหวด ภูผายล.png',
+    'อ่างเก็บน้ำห้วยหวด': '/รูปสถานที่สำคัญ/น้ำตกคำสร้าง ห้วยหวด ภูผายล.png',
+    'อุทยานแห่งชาติภูผายล': '/รูปสถานที่สำคัญ/อุทยานแห่งชาติภูผายล.png',
+    'อุทยานบัวเฉลิมพระเกียรติ': '/รูปสถานที่สำคัญ/อุทยานบัว.png',
+    'ปราสาทผึ้ง': '/รูปสถานที่สำคัญ/แห่ปราสาทผึ้ง.png',
+    'ประเพณีแห่ปราสาทผึ้ง': '/รูปสถานที่สำคัญ/แห่ปราสาทผึ้ง.png',
+    'ผ้าย้อมคราม': '/รูปสถานที่สำคัญ/ผ้าย้อมคราม.png',
+    'ผ้าย้อมครามบ้านดอนกอย': '/รูปสถานที่สำคัญ/ผ้าย้อมคราม.png',
+    'ชุมชนท่าแร่': '/รูปสถานที่สำคัญ/ท่าแร่.png',
+    'ประเพณีแห่ดาว': '/รูปสถานที่สำคัญ/แห่ดาว.png',
+    '8 ชนเผ่า': '/รูปสถานที่สำคัญ/ชนเผ่า.png',
+    '8 ชนเผ่าสกลนคร': '/รูปสถานที่สำคัญ/ชนเผ่า.png',
+    'ภูไท': '/รูปสถานที่สำคัญ/ชนเผ่า.png',
+    'เก็บดาว': commandCardCollectStar,
+    'หลบก้อนหิน': '/รูปสถานที่สำคัญ/ก้อนหิน.png',
+    'หลบต้นไม้': '/รูปสถานที่สำคัญ/ต้นไม้.png',
+    'หลบถนนซ่อม': '/รูปสถานที่สำคัญ/ซ่อมถนน.png',
+    'หลบสุนัขดุ': '/รูปสถานที่สำคัญ/หมาดุ.png',
+  }
+  const imageSteps = mission.steps.filter((step) => missionImages[step.label])
+  const routeBreakAfter = mission.steps.length === 7 ? 5 : 6
+  return <article className={`mission-brief ${theme} ${isDrawing ? 'mission-changing' : ''}`} aria-live="polite" aria-busy={isDrawing}>
     <div className="mission-topline"><span>ภารกิจที่ {String(mission.id).padStart(2, '0')}</span><span>{mission.realm === 'mixed' ? '🌈 รวม 3 ธรรม' : `${realms[mission.realm].icon} ${realms[mission.realm].title}`}</span></div>
     <h3>{mission.title}</h3>
-    <ol className="route-list">{mission.steps.map((step, index) => <li key={`${step.kind}-${index}`} className={step.kind}><span>{stepIcon[step.kind]}</span>{step.label}</li>)}</ol>
+    <div className="mission-image-strip" aria-label="รูปประกอบภารกิจ">
+      {imageSteps.map((step, index) => <figure key={`${step.label}-${index}`} className={`mission-image-card ${step.kind}`}><img src={missionImages[step.label]} alt={step.label} /><figcaption>{step.label}</figcaption></figure>)}
+    </div>
+    <ol className="route-list">{mission.steps.map((step, index) => <li key={`${step.kind}-${index}`} className={step.kind}><span>{stepIcon[step.kind]}</span>{step.label}</li>).flatMap((item, index) => index > 0 && index % routeBreakAfter === 0 ? [<li key={`break-${index}`} className="route-row-break" aria-hidden="true" />, item] : [item])}</ol>
     <div className="ready-check"><strong>เตรียมกระดานจริง</strong><ol><li>หยิบรูปตามภารกิจไปวางบนตาราง</li><li>วางดาวและสิ่งกีดขวางตามโจทย์</li><li>เลือกจุดเริ่มต้นของหุ่นยนต์</li><li>เขียนคำสั่ง แล้วให้เพื่อนหุ่นยนต์ลองเดิน</li></ol></div>
-    <button type="button" className="secondary-button" onClick={onDrawAgain}>สุ่มภารกิจใหม่</button>
+    <button type="button" className="secondary-button reroll-button" onClick={onDrawAgain} disabled={isDrawing}>{isDrawing ? 'กำลังเปลี่ยนภารกิจ...' : 'สุ่มภารกิจใหม่'}</button>{isDrawing && <div className="mission-change-indicator" aria-hidden="true"><span>🧭</span><b>กำลังเลือกเส้นทางใหม่</b></div>}
   </article>
 }
 
@@ -69,14 +103,14 @@ function Mission() {
         setRemaining((previous) => previous.filter((id) => id !== mission.id))
       }
       setIsDrawing(false)
-    }, shouldReduceMotion ? 0 : 720)
+    }, shouldReduceMotion ? 0 : 1200)
   }
 
   return <section className="panel mission" aria-labelledby="mission-title">
     <div className="section-heading"><h2 id="mission-title">สุ่มภารกิจของทีม</h2><p>ไม่ต้องเลือกหมวดค่ะ กดปุ่ม แล้วออกเดินทางไปด้วยกัน!</p></div>
     <div className="draw-stage"><div className={`compass ${isDrawing ? 'spinning' : ''}`} aria-hidden="true">🧭</div><p>ในรอบนี้เหลือ <strong>{remaining.length || missions.length}</strong> ภารกิจ</p><button type="button" className="primary-button draw-button" onClick={draw} disabled={isDrawing}>{isDrawing ? 'กำลังสุ่ม...' : '✨ สุ่มภารกิจ!'}</button></div>
     {remaining.length === 0 && selected && <button type="button" className="reset-button" onClick={() => { setRemaining(missions.map((mission) => mission.id)); setSelected(null) }}>เริ่มชุดภารกิจใหม่ 20 ใบ</button>}
-    {selected && <div className="mission-backdrop" role="presentation" onMouseDown={() => setSelected(null)}><motion.div className="mission-modal" role="dialog" aria-modal="true" aria-labelledby="mission-dialog-title" initial={shouldReduceMotion ? false : { opacity: 0, scale: .92, y: 24 }} animate={{ opacity: 1, scale: 1, y: 0 }} onMouseDown={(event) => event.stopPropagation()}><button type="button" className="modal-close" aria-label="ปิดภารกิจ" onClick={() => setSelected(null)}>×</button><div id="mission-dialog-title" className="sr-only">รายละเอียดภารกิจที่สุ่มได้</div><MissionBrief mission={selected} onDrawAgain={draw} /></motion.div></div>}
+    {selected && <div className="mission-backdrop" role="presentation" onMouseDown={() => setSelected(null)}><motion.div className="mission-modal" role="dialog" aria-modal="true" aria-labelledby="mission-dialog-title" initial={shouldReduceMotion ? false : { opacity: 0, scale: .92, y: 24 }} animate={{ opacity: 1, scale: 1, y: 0 }} onMouseDown={(event) => event.stopPropagation()}><button type="button" className="modal-close" aria-label="ปิดภารกิจ" onClick={() => setSelected(null)}>×</button><div id="mission-dialog-title" className="sr-only">รายละเอียดภารกิจที่สุ่มได้</div><MissionBrief mission={selected} onDrawAgain={draw} isDrawing={isDrawing} /></motion.div></div>}
   </section>
 }
 
@@ -127,6 +161,21 @@ function BoardExample({ className = '', onClick, robot, starCollected = false }:
   const withRobot = <>{content}{robot && <div className="board-robot" style={{ left: robot.left, top: robot.top }}><span>🤖</span><small>หุ่นยนต์</small></div>}</>
   if (onClick) return <button type="button" className={`board-demo-image ${className}`} aria-label="ขยายตัวอย่างกระดานเต็มหน้าจอ" onClick={onClick}>{withRobot}</button>
   return <div className={`board-demo-image ${className}`}>{withRobot}</div>
+}
+
+
+function BoardLanding({ onOpenDemo }: { onOpenDemo: () => void }) {
+  return <section className="panel board-landing" aria-labelledby="board-title">
+    <div className="section-heading"><h2 id="board-title">วางรูปบนตาราง</h2><p>ดูตัวอย่างการวางรูปสถานที่ ดาว และสิ่งกีดขวางบนกระดาน 8×8 ก่อนลงมือเล่นจริงค่ะ</p></div>
+    <div className="activity-preview"><span aria-hidden="true">🗺️</span><p>จัดตำแหน่งภาพภารกิจบนช่อง A–H และ 1–8</p><button type="button" className="primary-button" onClick={onOpenDemo}>ดูตัวอย่างการวาง</button></div>
+  </section>
+}
+
+function RobotLanding({ onOpenDemo }: { onOpenDemo: () => void }) {
+  return <section className="panel robot-landing" aria-labelledby="robot-title">
+    <div className="section-heading"><h2 id="robot-title">สั่งหุ่นยนต์เดิน</h2><p>ฝึกอ่านคำสั่งทีละขั้น ดูพิกัดปลายทาง แล้วกดเล่นอัตโนมัติเมื่อพร้อมค่ะ</p></div>
+    <div className="activity-preview"><span aria-hidden="true">🤖</span><p>เริ่มจาก B7 แล้วเดินตามคำสั่งไปเก็บดาวและถึงจุดจบ</p><button type="button" className="primary-button" onClick={onOpenDemo}>ดูตัวอย่างการเดิน</button></div>
+  </section>
 }
 
 function BoardDemoModal({ onClose }: { onClose: () => void }) {
@@ -186,11 +235,13 @@ export default function App() {
   const [isBoardDemoOpen, setBoardDemoOpen] = useState(false)
   const [isRobotDemoOpen, setRobotDemoOpen] = useState(false)
   return <MotionConfig reducedMotion="user"><main className={`${view}-view`}>
-    <header className="hero"><Suspense fallback={null}><AdventureScene /></Suspense><div className="hero-content"><p className="eyebrow">ABS BOOTCAMP · UNPLUGGED</p><h1>ตะลุย <em>แดน 3 ธรรม</em></h1><p className="hero-copy">เรียนรู้สกลนคร แล้วออกแบบคำสั่งให้หุ่นยนต์ของทีม<span className="keep-line">เดินบนกระดานจริง</span></p><div className="hero-actions"><button type="button" className="primary-button" onClick={() => setView('knowledge')}>เริ่มเรียนรู้</button><button type="button" className="ghost-button" onClick={() => setView('mission')}>สุ่มภารกิจ</button></div></div></header>
-    <nav aria-label="เมนูหลัก"><button type="button" aria-current={view === 'home' ? 'page' : undefined} onClick={() => setView('home')}>หน้าแรก</button><button type="button" aria-current={view === 'knowledge' ? 'page' : undefined} onClick={() => setView('knowledge')}>1. เรียนรู้</button><button type="button" aria-current={view === 'mission' ? 'page' : undefined} onClick={() => setView('mission')}>2. สุ่มภารกิจ</button></nav>
-    {view === 'home' && <section className="home-intro"><h2><span className="home-heading-line">ดูข้อมูลก่อน แล้วไปทำภารกิจบนกระดานจริง</span></h2><div className="home-steps"><button type="button" className="flow-step" onClick={() => setView('knowledge')}><b>1</b><span>เรียนรู้สถานที่</span><small>กดเพื่อเริ่มเรียนรู้</small></button><button type="button" className="flow-step" onClick={() => setView('mission')}><b>2</b><span>สุ่มภารกิจทีม</span><small>กดเพื่อสุ่มภารกิจ</small></button><button type="button" className="flow-step" onClick={() => setBoardDemoOpen(true)}><b>3</b><span>วางรูปบนตาราง</span><small>ดูตัวอย่างการวาง</small></button><button type="button" className="flow-step" onClick={() => setRobotDemoOpen(true)}><b>4</b><span>สั่งหุ่นยนต์เดิน</span><small>ดูตัวอย่างการเดิน</small></button></div></section>}
+    <header className="hero"><Suspense fallback={null}><AdventureScene /></Suspense><div className="hero-content"><h1>ตะลุย <em>แดน 3 ธรรม</em></h1><p className="hero-copy">เรียนรู้สกลนคร แล้วออกแบบคำสั่งให้หุ่นยนต์ของทีม<span className="keep-line">เดินบนกระดานจริง</span></p></div></header>
+    <nav aria-label="เมนูหลัก"><button type="button" className={view === 'home' ? 'active' : undefined} aria-current={view === 'home' ? 'page' : undefined} onClick={() => setView('home')}>หน้าแรก</button><button type="button" className={view === 'knowledge' ? 'active' : undefined} aria-current={view === 'knowledge' ? 'page' : undefined} onClick={() => setView('knowledge')}>1. เรียนรู้</button><button type="button" className={view === 'mission' ? 'active' : undefined} aria-current={view === 'mission' ? 'page' : undefined} onClick={() => setView('mission')}>2. สุ่มภารกิจ</button><button type="button" className={view === 'board' ? 'active' : undefined} aria-current={view === 'board' ? 'page' : undefined} onClick={() => setView('board')}>3. วางรูปบนตาราง</button><button type="button" className={view === 'robot' ? 'active' : undefined} aria-current={view === 'robot' ? 'page' : undefined} onClick={() => setView('robot')}>4. สั่งหุ่นยนต์เดิน</button></nav>
+    {view === 'home' && <section className="home-intro"><h2><span className="home-heading-line">ดูข้อมูลก่อน แล้วไปทำภารกิจบนกระดานจริง</span></h2><div className="home-steps"><button type="button" className="flow-step" onClick={() => setView('knowledge')}><b>1</b><span>เรียนรู้สถานที่</span><small>กดเพื่อเริ่มเรียนรู้</small></button><button type="button" className="flow-step" onClick={() => setView('mission')}><b>2</b><span>สุ่มภารกิจทีม</span><small>กดเพื่อสุ่มภารกิจ</small></button><button type="button" className="flow-step" onClick={() => setView('board')}><b>3</b><span>วางรูปบนตาราง</span><small>ดูตัวอย่างการวาง</small></button><button type="button" className="flow-step" onClick={() => setView('robot')}><b>4</b><span>สั่งหุ่นยนต์เดิน</span><small>ดูตัวอย่างการเดิน</small></button></div></section>}
     {view === 'knowledge' && <Knowledge onMission={() => setView('mission')} />}
     {view === 'mission' && <Mission />}
+    {view === 'board' && <BoardLanding onOpenDemo={() => setBoardDemoOpen(true)} />}
+    {view === 'robot' && <RobotLanding onOpenDemo={() => setRobotDemoOpen(true)} />}
     <footer>กิจกรรม Unplugged — การวางรูปและการเดินของหุ่นยนต์ทำบนกระดานจริงค่ะ</footer>
     {isBoardDemoOpen && <BoardDemoModal onClose={() => setBoardDemoOpen(false)} />}
     {isRobotDemoOpen && <RobotDemoModal onClose={() => setRobotDemoOpen(false)} />}
