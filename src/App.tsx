@@ -165,10 +165,10 @@ function BoardExample({ className = '', onClick, robot, starCollected = false }:
 }
 
 
-function BoardLanding({ onOpenDemo, onRobot }: { onOpenDemo: () => void; onRobot: () => void }) {
+function BoardLanding({ onKnowledge, onOpenDemo, onRobot }: { onKnowledge: () => void; onOpenDemo: () => void; onRobot: () => void }) {
   return <section className="panel board-landing" aria-labelledby="board-title">
     <div className="section-heading"><h2 id="board-title">วางรูปบนตาราง</h2><p>ดูตัวอย่างการวางรูปสถานที่ ดาว และสิ่งกีดขวางบนกระดาน 8×8 ก่อนลงมือเล่นจริงค่ะ</p></div>
-    <div className="activity-preview"><span aria-hidden="true">🗺️</span><p>จัดตำแหน่งภาพภารกิจบนช่อง A–H และ 1–8</p><div className="activity-actions"><button type="button" className="primary-button" onClick={onOpenDemo}>ดูตัวอย่างการวาง</button><button type="button" className="secondary-button" onClick={onRobot}>ไปสั่งหุ่นยนต์เดิน</button></div></div>
+    <div className="activity-preview"><span aria-hidden="true">🗺️</span><p>จัดตำแหน่งภาพภารกิจบนช่อง A–H และ 1–8</p><div className="activity-actions"><button type="button" className="secondary-button" onClick={onKnowledge}>ไปเรียนรู้สถานที่</button><button type="button" className="primary-button" onClick={onOpenDemo}>ดูตัวอย่างการวาง</button><button type="button" className="secondary-button" onClick={onRobot}>ไปสั่งหุ่นยนต์เดิน</button></div></div>
   </section>
 }
 
@@ -241,7 +241,7 @@ export default function App() {
     {view === 'home' && <section className="home-intro"><h2><span className="home-heading-line">ดูข้อมูลก่อน แล้วไปทำภารกิจบนกระดานจริง</span></h2><div className="home-steps"><button type="button" className="flow-step" onClick={() => setView('knowledge')}><b>1</b><span>เรียนรู้สถานที่</span><small>กดเพื่อเริ่มเรียนรู้</small></button><button type="button" className="flow-step" onClick={() => setView('board')}><b>2</b><span>วางรูปบนตาราง</span><small>ดูตัวอย่างการวาง</small></button><button type="button" className="flow-step" onClick={() => setView('robot')}><b>3</b><span>สั่งหุ่นยนต์เดิน</span><small>ดูตัวอย่างการเดิน</small></button><button type="button" className="flow-step" onClick={() => setView('mission')}><b>4</b><span>สุ่มภารกิจทีม</span><small>กดเพื่อสุ่มภารกิจ</small></button></div></section>}
     {view === 'knowledge' && <Knowledge onBoard={() => setView('board')} />}
     {view === 'mission' && <Mission />}
-    {view === 'board' && <BoardLanding onOpenDemo={() => setBoardDemoOpen(true)} onRobot={() => setView('robot')} />}
+    {view === 'board' && <BoardLanding onKnowledge={() => setView('knowledge')} onOpenDemo={() => setBoardDemoOpen(true)} onRobot={() => setView('robot')} />}
     {view === 'robot' && <RobotLanding onOpenDemo={() => setRobotDemoOpen(true)} />}
     <footer>กิจกรรม Unplugged — การวางรูปและการเดินของหุ่นยนต์ทำบนกระดานจริงค่ะ</footer>
     {isBoardDemoOpen && <BoardDemoModal onClose={() => setBoardDemoOpen(false)} />}
