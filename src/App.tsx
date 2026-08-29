@@ -15,7 +15,7 @@ type View = 'home' | 'knowledge' | 'mission' | 'board' | 'robot'
 const realmOrder: Realm[] = ['dhamma', 'nature', 'culture']
 const AdventureScene = lazy(async () => import('./AdventureScene').then((module) => ({ default: module.AdventureScene })))
 
-function Knowledge({ onMission }: { onMission: () => void }) {
+function Knowledge({ onBoard }: { onBoard: () => void }) {
   const [realm, setRealm] = useState<Realm>('dhamma')
   const [index, setIndex] = useState(0)
   const choices = places.filter((place) => place.realm === realm)
@@ -36,7 +36,7 @@ function Knowledge({ onMission }: { onMission: () => void }) {
         <div className="place-image">{current.image ? <img src={current.image} alt={current.title} /> : <div className="image-placeholder" aria-label={`ยังไม่มีภาพ ${current.title}`}>🗺️<small>รอภาพสถานที่</small></div>}</div>
         <div className="place-copy"><span className={`realm-label ${realms[realm].color}`}>{realms[realm].icon} {realms[realm].title}</span><h3>{current.title}</h3><p>{current.summary}</p><div className="place-controls"><button type="button" onClick={() => setIndex((value) => (value - 1 + choices.length) % choices.length)}>← ก่อนหน้า</button><span>{index + 1} / {choices.length}</span><button type="button" onClick={() => setIndex((value) => (value + 1) % choices.length)}>ถัดไป →</button></div></div>
       </article>
-      <button type="button" className="primary-button" onClick={onMission}>รู้จักแล้ว ไปสุ่มภารกิจ!</button>
+      <button type="button" className="primary-button" onClick={onBoard}>รู้จักแล้ว ไปวางรูปบนตาราง!</button>
     </section>
   )
 }
@@ -237,9 +237,9 @@ export default function App() {
   const [isRobotDemoOpen, setRobotDemoOpen] = useState(false)
   return <MotionConfig reducedMotion="user"><main className={`${view}-view`}>
     <header className="hero"><Suspense fallback={null}><AdventureScene /></Suspense><div className="hero-content"><h1>ตะลุย <em>แดน 3 ธรรม</em></h1><p className="hero-copy">เรียนรู้สกลนคร แล้วออกแบบคำสั่งให้หุ่นยนต์ของทีม<span className="keep-line">เดินบนกระดานจริง</span></p></div></header>
-    <nav aria-label="เมนูหลัก"><button type="button" className={view === 'home' ? 'active' : undefined} aria-current={view === 'home' ? 'page' : undefined} onClick={() => setView('home')}>หน้าแรก</button><button type="button" className={view === 'knowledge' ? 'active' : undefined} aria-current={view === 'knowledge' ? 'page' : undefined} onClick={() => setView('knowledge')}>1. เรียนรู้</button><button type="button" className={view === 'mission' ? 'active' : undefined} aria-current={view === 'mission' ? 'page' : undefined} onClick={() => setView('mission')}>2. สุ่มภารกิจ</button><button type="button" className={view === 'board' ? 'active' : undefined} aria-current={view === 'board' ? 'page' : undefined} onClick={() => setView('board')}>3. วางรูปบนตาราง</button><button type="button" className={view === 'robot' ? 'active' : undefined} aria-current={view === 'robot' ? 'page' : undefined} onClick={() => setView('robot')}>4. สั่งหุ่นยนต์เดิน</button></nav>
-    {view === 'home' && <section className="home-intro"><h2><span className="home-heading-line">ดูข้อมูลก่อน แล้วไปทำภารกิจบนกระดานจริง</span></h2><div className="home-steps"><button type="button" className="flow-step" onClick={() => setView('knowledge')}><b>1</b><span>เรียนรู้สถานที่</span><small>กดเพื่อเริ่มเรียนรู้</small></button><button type="button" className="flow-step" onClick={() => setView('mission')}><b>2</b><span>สุ่มภารกิจทีม</span><small>กดเพื่อสุ่มภารกิจ</small></button><button type="button" className="flow-step" onClick={() => setView('board')}><b>3</b><span>วางรูปบนตาราง</span><small>ดูตัวอย่างการวาง</small></button><button type="button" className="flow-step" onClick={() => setView('robot')}><b>4</b><span>สั่งหุ่นยนต์เดิน</span><small>ดูตัวอย่างการเดิน</small></button></div></section>}
-    {view === 'knowledge' && <Knowledge onMission={() => setView('mission')} />}
+    <nav aria-label="เมนูหลัก"><button type="button" className={view === 'home' ? 'active' : undefined} aria-current={view === 'home' ? 'page' : undefined} onClick={() => setView('home')}>หน้าแรก</button><button type="button" className={view === 'knowledge' ? 'active' : undefined} aria-current={view === 'knowledge' ? 'page' : undefined} onClick={() => setView('knowledge')}>1. เรียนรู้สถานที่</button><button type="button" className={view === 'board' ? 'active' : undefined} aria-current={view === 'board' ? 'page' : undefined} onClick={() => setView('board')}>2. วางรูปบนตาราง</button><button type="button" className={view === 'robot' ? 'active' : undefined} aria-current={view === 'robot' ? 'page' : undefined} onClick={() => setView('robot')}>3. สั่งหุ่นยนต์เดิน</button><button type="button" className={view === 'mission' ? 'active' : undefined} aria-current={view === 'mission' ? 'page' : undefined} onClick={() => setView('mission')}>4. สุ่มภารกิจทีม</button></nav>
+    {view === 'home' && <section className="home-intro"><h2><span className="home-heading-line">ดูข้อมูลก่อน แล้วไปทำภารกิจบนกระดานจริง</span></h2><div className="home-steps"><button type="button" className="flow-step" onClick={() => setView('knowledge')}><b>1</b><span>เรียนรู้สถานที่</span><small>กดเพื่อเริ่มเรียนรู้</small></button><button type="button" className="flow-step" onClick={() => setView('board')}><b>2</b><span>วางรูปบนตาราง</span><small>ดูตัวอย่างการวาง</small></button><button type="button" className="flow-step" onClick={() => setView('robot')}><b>3</b><span>สั่งหุ่นยนต์เดิน</span><small>ดูตัวอย่างการเดิน</small></button><button type="button" className="flow-step" onClick={() => setView('mission')}><b>4</b><span>สุ่มภารกิจทีม</span><small>กดเพื่อสุ่มภารกิจ</small></button></div></section>}
+    {view === 'knowledge' && <Knowledge onBoard={() => setView('board')} />}
     {view === 'mission' && <Mission />}
     {view === 'board' && <BoardLanding onOpenDemo={() => setBoardDemoOpen(true)} />}
     {view === 'robot' && <RobotLanding onOpenDemo={() => setRobotDemoOpen(true)} />}
