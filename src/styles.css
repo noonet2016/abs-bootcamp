@@ -332,3 +332,10 @@ nav button.active { color: white; background: #193f5a; }
 
 .hero h1 { line-height: 1.08; }
 .hero h1 em { margin-top: .08em; }
+
+.activity-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
